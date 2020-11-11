@@ -1,0 +1,48 @@
+/* header */
+@import '../../base.scss';
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+
+
+.search {
+    display: flex;
+    flex-grow: 1;
+    margin: 0 2rem;
+}
+
+.search__input {
+    width: 100%;
+    font-size: inherit;
+    padding: 0.4rem;
+    border: 2px solid $primary-color;
+    color: $primary-color;
+    background: transparent;
+
+    &:focus {
+        outline: none;
+
+    }
+}
+
+.search__button {
+    display: flex;
+    align-items: center;
+    padding: 0 1.25rem;
+    background: transparent;
+    border: 2px solid $primary-color;
+    color: $primary-color;
+    border-left: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    cursor: pointer;
+}
+
+.search-button:hover {
+    background-color: #f0f0f0;
+}

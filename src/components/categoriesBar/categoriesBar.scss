@@ -1,0 +1,54 @@
+@import '../../base.scss';
+
+/* .categories */
+.categories {
+    padding: 1rem 0rem;
+    /* border-top: 1px solid #999;
+    border-bottom: 1px solid #999; */
+}
+
+
+.category-section {
+    display: flex;
+    overflow: hidden;
+    overflow-x: scroll;
+}
+
+
+
+.category {
+    margin-right: 1rem;
+    white-space: nowrap;
+    border: 2px solid $primary-color;
+    border-radius: 999px;
+    background: transparent;
+    color: $primary-color;
+    font-weight: 500;
+    padding: 0.5rem;
+    font-size: inherit;
+    cursor: pointer;
+    transition: all 150ms;
+}
+
+.category-section .fadeRight {
+    background-image: linear-gradient(180deg,
+            transparent,
+            rgba(37, 37, 37, 0.1),
+            #111);
+    height: 3rem;
+    width: 1rem;
+}
+
+.category:hover {
+    background-color: #374a59;
+}
+
+.category.active {
+    background-color: #606060;
+    color: #fff;
+    border-color: #eee;
+}
+
+.category:last-child {
+    margin-right: none;
+}
