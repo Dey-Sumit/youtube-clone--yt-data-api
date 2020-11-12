@@ -9,6 +9,8 @@ import HomeScreen from './screens/homeScreen/HomeScreen'
 import LoginScreen from './screens/loginScreen/LoginScreen'
 
 import './app.scss'
+import WatchScreen from './screens/watchScreen/WatchScreen'
+import SearchResultsScreen from './screens/searchResultsScreen/SearchResultsScreen'
 
 const App = () => {
 
@@ -31,7 +33,20 @@ const App = () => {
             <Route path="/" exact>
                 <div className="app__container">
                     <Sidebar />
-                    <HomeScreen />
+                    {/* <HomeScreen /> */}
+                    <SearchResultsScreen />
+                </div>
+            </Route>
+            <Route path="/watch/:id">
+                <div className="app__container">
+                    <Sidebar />
+                    <WatchScreen />
+                </div>
+            </Route>
+            <Route path="/search/:search_query" exact>
+                <div className="app__container">
+                    <Sidebar />
+                    <SearchResultsScreen />
                 </div>
             </Route>
 

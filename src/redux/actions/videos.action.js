@@ -1,18 +1,59 @@
 import axios from 'axios'
-import { SET_VIDEOS } from '../types'
+import { SET_ERRORS, SET_POPULAR_VIDEOS, SET_VIDEOS } from '../types'
 
-export const fetchVideos = () => async dispatch => {
-    console.log("here");
-    const { data } = await axios.get('https://www.googleapis.com/youtube/v3/search', {
-        params: {
-            part: 'snippet',
-            q: 'Backbench Coder',
-            key: 'AIzaSyBcgnhm-BdEzBmhIJKAzBGytCVC-0Avc9o'
-        }
-    })
-    console.log(data);
-    dispatch({
-        type: SET_VIDEOS,
-        payload: data.items
-    })
+const request = axios.create({
+    method: 'get',
+    baseURL: 'https://www.googleapis.com/youtube/v3',
+    params: {
+        key: process.env.REACT_APP_YOUTUBE_API_KEY
+    }
+})
+
+
+export const searchVideos = (q) => async dispatch => {
+    try {
+        const { data } = await request('/search', {
+            params: {
+                part: 'snippet',
+                q
+            }
+        })
+        dispatch({
+            type: SET_VIDEOS,
+            payload: data.items
+        })
+    } catch (error) {
+        console.log(error);
+        dispatch({
+            type: SET_ERRORS,
+            payload: error.message
+        })
+    }
+
 }
+
+
+export const fetchPopularVideos = () => async dispatch => {
+    try {
+        const { data } = await request('/videos', {
+            params: {
+                part: 'snippet,contentDetails,statistics',
+                chart: 'mostPopular',
+                regionCode: 'IN',
+                maxResults: 15
+            }
+        })
+        dispatch({
+            type: SET_POPULAR_VIDEOS,
+            payload: data.items
+        })
+    } catch (error) {
+        console.log(error);
+        dispatch({
+            type: SET_ERRORS,
+            payload: error.message
+        })
+    }
+
+}
+

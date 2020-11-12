@@ -1,5 +1,20 @@
 .video {
+
+    padding: 2rem;
+
     // border: 1px solid red;
+    &-horizontal {
+        display: flex;
+        width: 100%;
+        padding: 2rem;
+
+        .video__thumbnail__image {
+            // flex: 0.3;
+            // width: 100%;
+            // background-color: #aaa;
+            margin-right: 1rem;
+        }
+    }
 
     &__thumbnail {
         width: 100%;
@@ -14,6 +29,7 @@
         display: flex;
         align-items: flex-start;
         margin-top: 1rem;
+        flex: 1;
     }
 
     &__channel-icon {
@@ -27,12 +43,12 @@
     }
 
     &__title {
-        font-size: 1rem;
-        font-weight: bold;
+        font-size: 0.9rem;
+        font-weight: 500;
         text-decoration: none;
         margin-bottom: 1px;
         color: #fff;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.1px;
     }
 
     &__channel-name {
