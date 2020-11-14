@@ -11,6 +11,24 @@ import LoginScreen from './screens/loginScreen/LoginScreen'
 import './app.scss'
 import WatchScreen from './screens/watchScreen/WatchScreen'
 import SearchResultsScreen from './screens/searchResultsScreen/SearchResultsScreen'
+import Header from './components/header/Header'
+
+
+
+const Layout = ({ children }) => {
+    return (
+        <>
+            <Header />
+            <div className="app__container">
+                <Sidebar />
+                {children}
+            </div>
+        </>
+    )
+
+}
+
+
 
 const App = () => {
 
@@ -31,23 +49,19 @@ const App = () => {
                 <LoginScreen />
             </Route>
             <Route path="/" exact>
-                <div className="app__container">
-                    <Sidebar />
-                    {/* <HomeScreen /> */}
-                    <SearchResultsScreen />
-                </div>
+                <Layout>
+                    <HomeScreen />
+                </Layout>
             </Route>
-            <Route path="/watch/:id">
-                <div className="app__container">
-                    <Sidebar />
+            <Route path="/watch/:id" exact>
+                <Layout>
                     <WatchScreen />
-                </div>
+                </Layout>
             </Route>
             <Route path="/search/:search_query" exact>
-                <div className="app__container">
-                    <Sidebar />
+                <Layout>
                     <SearchResultsScreen />
-                </div>
+                </Layout>
             </Route>
 
         </Switch>

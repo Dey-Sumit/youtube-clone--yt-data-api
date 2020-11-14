@@ -32,7 +32,6 @@ const HomeScreen = () => {
     return (
 
         <Container className="main">
-            <Header />
             <CategoriesBar />
 
             <h4>Recommended Videos</h4>

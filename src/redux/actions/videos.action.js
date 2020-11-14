@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { SET_ERRORS, SET_POPULAR_VIDEOS, SET_VIDEOS } from '../types'
+import { SET_ERRORS, SET_POPULAR_VIDEOS, SET_RELATED_VIDEOS, SET_VIDEOS } from '../types'
 
 const request = axios.create({
     method: 'get',
@@ -8,6 +8,29 @@ const request = axios.create({
         key: process.env.REACT_APP_YOUTUBE_API_KEY
     }
 })
+
+export const getRelatedVideos = (videoId) => async dispatch => {
+    try {
+        const { data } = await request('/search', {
+            params: {
+                part: 'snippet',
+                relatedToVideoId: videoId,
+                type: 'video'
+            }
+        })
+        dispatch({
+            type: SET_RELATED_VIDEOS,
+            payload: data.items
+        })
+    } catch (error) {
+        console.log(error);
+        dispatch({
+            type: SET_ERRORS,
+            payload: error.message
+        })
+    }
+}
+
 
 
 export const searchVideos = (q) => async dispatch => {

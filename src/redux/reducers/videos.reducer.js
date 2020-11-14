@@ -1,8 +1,9 @@
-import { SET_ERRORS, SET_POPULAR_VIDEOS, SET_VIDEOS } from "../types"
+import { SET_ERRORS, SET_POPULAR_VIDEOS, SET_RELATED_VIDEOS, SET_VIDEOS } from "../types"
 
 const initialState = {
     videos: null,
     popularVideos: null,
+    relatedVideos: null,
     loading: false,
     errors: null
 }
@@ -20,6 +21,11 @@ export const videosReducer = (state = initialState, action) => {
             return {
                 ...state,
                 popularVideos: payload
+            }
+        case SET_RELATED_VIDEOS:
+            return {
+                ...state,
+                relatedVideos: payload
             }
         case SET_ERRORS:
             return {

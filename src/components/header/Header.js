@@ -5,6 +5,7 @@ import { FaSearch } from 'react-icons/fa'
 import { useDispatch } from 'react-redux'
 import { searchVideos } from '../../redux/actions/videos.action'
 import { useHistory } from 'react-router-dom'
+import YtLogo from '../ytlogo'
 
 const Header = () => {
     const [input, setInput] = useState('')
@@ -20,7 +21,9 @@ const Header = () => {
 
     return (
         <div className="header">
+            <img src="http://pngimg.com/uploads/youtube/youtube_PNG2.png" alt="yt logo" className="logo" />
             <form className="search" onSubmit={handleSearch}>
+
                 <input type="text" placeholder="Search" className="search__input"
                     value={input} onChange={e => setInput(e.target.value)} />
                 <button className="search__button" type="submit">
