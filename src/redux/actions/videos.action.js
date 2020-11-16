@@ -1,15 +1,9 @@
-import axios from 'axios'
-import { SET_ERRORS, SET_POPULAR_VIDEOS, SET_RELATED_VIDEOS, SET_VIDEOS } from '../types'
-
-const request = axios.create({
-    method: 'get',
-    baseURL: 'https://www.googleapis.com/youtube/v3',
-    params: {
-        key: process.env.REACT_APP_YOUTUBE_API_KEY
-    }
-})
+import request from '../../api';
+import { SET_VIDEOS_ERRORS, SET_POPULAR_VIDEOS, SET_RELATED_VIDEOS, SET_VIDEOS } from '../types'
 
 export const getRelatedVideos = (videoId) => async dispatch => {
+    console.log("request getCommentsOfVideoById");
+
     try {
         const { data } = await request('/search', {
             params: {
@@ -23,9 +17,10 @@ export const getRelatedVideos = (videoId) => async dispatch => {
             payload: data.items
         })
     } catch (error) {
-        console.log(error);
+        console.log(error.code);
+        console.log(error.message);
         dispatch({
-            type: SET_ERRORS,
+            type: SET_VIDEOS_ERRORS,
             payload: error.message
         })
     }
@@ -33,7 +28,10 @@ export const getRelatedVideos = (videoId) => async dispatch => {
 
 
 
+
 export const searchVideos = (q) => async dispatch => {
+    console.log("request searchVideos");
+
     try {
         const { data } = await request('/search', {
             params: {
@@ -48,7 +46,7 @@ export const searchVideos = (q) => async dispatch => {
     } catch (error) {
         console.log(error);
         dispatch({
-            type: SET_ERRORS,
+            type: SET_VIDEOS_ERRORS,
             payload: error.message
         })
     }
@@ -57,6 +55,8 @@ export const searchVideos = (q) => async dispatch => {
 
 
 export const fetchPopularVideos = () => async dispatch => {
+    console.log("request fetchPopularVideos");
+
     try {
         const { data } = await request('/videos', {
             params: {
@@ -66,14 +66,17 @@ export const fetchPopularVideos = () => async dispatch => {
                 maxResults: 15
             }
         })
+        console.log();
         dispatch({
             type: SET_POPULAR_VIDEOS,
             payload: data.items
         })
+
     } catch (error) {
         console.log(error);
+        console.log(error.message);
         dispatch({
-            type: SET_ERRORS,
+            type: SET_VIDEOS_ERRORS,
             payload: error.message
         })
     }

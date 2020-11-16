@@ -31,7 +31,7 @@ const Header = () => {
                 </button>
             </form>
             <div className="header__user-info">
-                <span className="mr-2">Sumit Dey</span>
+                <span className="mr-3">Sumit Dey</span>
                 <img src="http://unsplash.it/36/36?gravity=center" alt="" />
             </div>
         </div>

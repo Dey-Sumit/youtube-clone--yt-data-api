@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import YouTube from 'react-youtube';
 import VideoHorizontal from '../../components/videoHorizontal/VideoHorizontal';
-import { getRelatedVideos } from '../../redux/actions/videos.action';
+import { getCommentsOfVideoById, getRelatedVideos } from '../../redux/actions/comments.action';
 
 const WatchScreen = () => {
 
@@ -12,11 +12,16 @@ const WatchScreen = () => {
     const dispatch = useDispatch()
     const relatedVideos = useSelector(state => state.videos.relatedVideos)
     const loading = useSelector(state => state.videos.loading)
+    const comments = useSelector(state => state.comments.comments)
 
-    useEffect(() => {
-        dispatch(getRelatedVideos())
-    }, [dispatch, id])
+    // useEffect(() => {
+    //     dispatch(getRelatedVideos())
+    // }, [dispatch, id])
+    // useEffect(() => {
+    //     dispatch(getCommentsOfVideoById(id))
+    // }, [dispatch, id])
 
+    console.log(comments);
     const opts = {
         height: '390',
         width: '640',

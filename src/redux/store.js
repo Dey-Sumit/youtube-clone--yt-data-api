@@ -3,10 +3,12 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { authReducer } from './reducers/auth.reducer'
 import { videosReducer } from './reducers/videos.reducer'
+import { commentsReducer } from './reducers/comments.reducer'
 
 const rootReducer = combineReducers({
     auth: authReducer,
-    videos: videosReducer
+    videos: videosReducer,
+    comments: commentsReducer
 })
 const initialState = {}
 const middleWare = [thunk]

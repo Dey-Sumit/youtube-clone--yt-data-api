@@ -23,11 +23,7 @@ const Sidebar = () => {
             <SidebarItem Icon={AiOutlineFire} text="Trending" />
             <SidebarItem Icon={MdSubscriptions} text="Subscription" />
             <hr />
-            <SidebarItem Icon={AiFillYoutube} text="Youtube Redesign" />
-            <SidebarItem Icon={FiHome} text="Home" />
-            <SidebarItem Icon={AiOutlineFire} text="Trending" />
-            <SidebarItem Icon={MdSubscriptions} text="Subscription" />
-            <hr />
+
         </div>
     )
 }

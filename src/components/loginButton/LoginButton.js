@@ -21,7 +21,7 @@ const LoginButton = ({ scope }) => {
     return (
 
         <GoogleLogin
-            clientId="764916358289-r8psd5qkv59i3pilk5qlftqcnhd57u3h.apps.googleusercontent.com"
+            clientId={process.env.REACT_APP_YOUTUBE_CLIENT_ID}
             buttonText="Login with Google"
             onSuccess={responseGoogle}
             onFailure={handleError}

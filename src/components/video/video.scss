@@ -1,36 +1,20 @@
+@import '../../base.scss';
+
 .video {
 
-    padding: 2rem;
-
-    // border: 1px solid red;
-    &-horizontal {
-        display: flex;
-        width: 100%;
-        padding: 2rem;
-
-        .video__thumbnail__image {
-            // flex: 0.3;
-            // width: 100%;
-            // background-color: #aaa;
-            margin-right: 1rem;
-        }
-    }
+    background: linear-gradient(145deg, #181a1d, #141618);
+    box-shadow: 5px 5px 10px #090a0b,
+        -5px -5px 10px #23262b;
+    margin-bottom: 1rem;
+    padding: 0.7rem;
+    border-radius: 10px;
 
     &__thumbnail {
         width: 100%;
-        background-color: #aaa;
-
-        &__image {
-            width: 100%;
-        }
+        margin-bottom: 0.5rem;
     }
 
-    &__bottom {
-        display: flex;
-        align-items: flex-start;
-        margin-top: 1rem;
-        flex: 1;
-    }
+    &__bottom {}
 
     &__channel-icon {
         width: 36px;
@@ -49,12 +33,18 @@
         margin-bottom: 1px;
         color: #fff;
         letter-spacing: 0.1px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
     }
 
-    &__channel-name {
+    &__channel {
+        display: flex;
+        align-content: center;
         text-decoration: none;
         transition: color 150ms;
-        margin-bottom: 1px;
+        margin: 6px 0;
     }
 
 

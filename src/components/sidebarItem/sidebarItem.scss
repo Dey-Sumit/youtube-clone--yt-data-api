@@ -3,6 +3,14 @@
     align-items: center;
     font-size: 1.1rem;
     font-weight: 500;
-    margin-bottom: 1rem;
     color: #8E8D92;
+    cursor: pointer;
+    padding: 0.6rem 0.5rem;
+    border-radius: 5px;
+
+
+    &:hover {
+        background-color: #343A40;
+
+    }
 }
