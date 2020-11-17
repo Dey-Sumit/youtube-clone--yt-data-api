@@ -3,21 +3,21 @@ import './video.scss'
 import { AiFillEye } from 'react-icons/ai'
 import { Col, Row } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
-const Video = ({ video }) => {
-    const { id: { videoId }, snippet: { channelId, channelTitle, description, title, publishedAt, thumbnails: { high, standard, medium } } } = video
+import numeral from 'numeral'
 
+const Video = ({ video }) => {
+    const { id, snippet: { channelId, channelTitle, description, title, publishedAt, thumbnails: { high, standard, medium } }, statistics: { viewCount, likeCount } } = video
+    console.log(video);
     //TODO FIX id contains videoId,channelID,playlistId
     const history = useHistory()
     const handleVideoClick = () => {
-        // console.log(videoId);
-        // history.push(`/watch/${videoId}`)
+        console.log(id);
+        history.push(`/watch/${id}`)
     }
     const handleChannelClick = () => {
 
     }
-    function truncate(str, n = 50) {
-        return (str.length > n) ? str.substr(0, n - 1) + '...' : str;
-    };
+
 
     return (
         <div className='video' onClick={handleVideoClick}>
@@ -27,7 +27,7 @@ const Video = ({ video }) => {
 
             <p className="video__title">{title}</p>
             <div className="video__metadata">
-                <span><AiFillEye /> 12k </span>
+                <span><AiFillEye /> {numeral(viewCount).format('0.0a')} </span>
                 <span>• 1 week ago</span>
             </div>
             <div className="video__channel">

@@ -37,8 +37,8 @@ const App = () => {
     const { accessToken } = useSelector(state => state.auth)
 
     useEffect(() => {
-        if (accessToken) {
-            history.push('/')
+        if (!accessToken) {
+            history.push('/auth')
         }
     }, [accessToken, history])
 

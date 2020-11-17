@@ -6,6 +6,7 @@ export const SET_VIDEOS = "SET_VIDEOS"
 export const SET_POPULAR_VIDEOS = "SET_POPULAR_VIDEOS"
 export const SET_RELATED_VIDEOS = "SET_RELATED_VIDEOS"
 export const SET_VIDEOS_ERRORS = "SET_VIDEOS_ERRORS"
+export const SET_VIDEO = "SET_VIDEO"
 
 
 
