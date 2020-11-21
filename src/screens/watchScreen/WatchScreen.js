@@ -6,8 +6,8 @@ import YouTube from 'react-youtube';
 import Comment from '../../components/comment/Comment';
 import VideoHorizontal from '../../components/videoHorizontal/VideoHorizontal';
 import VideoMetaData from '../../components/videoMetaData/VideoMetaData';
-import { addComment, getCommentsOfVideoById, getRelatedVideos } from '../../redux/actions/comments.action';
-import { getVideoById } from '../../redux/actions/videos.action';
+import { addComment, getCommentsOfVideoById, } from '../../redux/actions/comments.action';
+import { getVideoById, getRelatedVideos } from '../../redux/actions/videos.action';
 
 const WatchScreen = () => {
 
@@ -19,9 +19,9 @@ const WatchScreen = () => {
     const comments = useSelector(state => state.comments.comments)
     console.log(video);
 
-    // useEffect(() => {
-    //     dispatch(getRelatedVideos())
-    // }, [dispatch, id])
+    useEffect(() => {
+        dispatch(getRelatedVideos())
+    }, [dispatch, id])
     useEffect(() => {
         dispatch(getCommentsOfVideoById(id))
     }, [dispatch, id])

@@ -1,27 +1,36 @@
 import React from 'react'
 import { FiHome } from 'react-icons/fi'
 import { AiOutlineFire, AiFillYoutube } from 'react-icons/ai'
-import { MdSubscriptions } from 'react-icons/md'
+import { MdSubscriptions, MdExitToApp } from 'react-icons/md'
 
 import './sidebar.scss'
 import SidebarItem from '../sidebarItem/SidebarItem'
+import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { logout } from '../../redux/actions/auth.action'
 
-const Sidebar = () => {
+const Sidebar = ({ showSidebar }) => {
+    //TODO handle in redux
+    const dispatch = useDispatch()
+
+    const handleLogout = () => {
+        console.log("clicked");
+        dispatch(logout())
+    }
+
     return (
-        <div className="sidebar">
 
-            {/* <img src="https://logos-world.net/wp-content/uploads/2020/04/YouTube-Logo-700x394.png" alt=""
-                class="youtube-logo" /> */}
-
+        <div className={showSidebar ? 'sidebar open' : 'sidebar'}>
             <SidebarItem Icon={AiFillYoutube} text="Youtube Redesign" />
             <SidebarItem Icon={FiHome} text="Home" />
             <SidebarItem Icon={AiOutlineFire} text="Trending" />
-            <SidebarItem Icon={MdSubscriptions} text="Subscription" />
+            <Link to="/feed/subscriptions">
+                <SidebarItem Icon={MdSubscriptions} text="Subscription" />
+            </Link>
             <hr />
-            <SidebarItem Icon={AiFillYoutube} text="Youtube Redesign" />
-            <SidebarItem Icon={FiHome} text="Home" />
-            <SidebarItem Icon={AiOutlineFire} text="Trending" />
-            <SidebarItem Icon={MdSubscriptions} text="Subscription" />
+            <div onClick={handleLogout} >
+                <SidebarItem Icon={MdExitToApp} text="Log Out" />
+            </div>
             <hr />
 
         </div>

@@ -6,19 +6,35 @@ import './videoHorizontal.scss'
 
 
 const VideoHorizontal = ({ video }) => {
-    const { id: { videoId }, snippet: { channelId, channelTitle, description, title, publishedAt, thumbnails: { medium } } } = video
+
+    const { id: { videoId }, snippet: { resourceId, channelId, channelTitle, description, title, publishedAt, thumbnails: { medium } } } = video
     //TODO FIX id contains videoId,channelID,playlistId
+    console.log(resourceId.kind);
+    const thumbnail = resourceId.kind === "youtube#channel" ? 'thumbnail-channel'
+        : resourceId.kind === "youtube#video" ? 'thumbnail-video' : 'thumbnail-playlist'
     const history = useHistory()
-    const handleVideoClick = () => {
-        history.push(`/watch/${videoId}`)
+
+    // const handleVideoClick = () => {
+    //     // history.push(`/watch/${videoId}`)
+    // }
+
+    const handleClick = () => {
+        if (resourceId.kind === "youtube#channel") {
+            history.push(`/channel/${resourceId.channelId}`)
+        }
+        // for video
+        //TODO handle playlist later
+        else {
+            history.push(`/watch/${resourceId.videoId}`)
+
+        }
     }
-    const handleChannelClick = () => { }
 
     return (
-        <Row className="p-2 videoHorizon" onClick={handleVideoClick}>
-            <Col xs={6} md={4}>
+        <Row className="p-2 videoHorizon" onClick={handleClick}>
+            <Col xs={6} md={4} className="videoHorizon__left">
                 <img src={medium.url}
-                    alt="" className="videoHorizon__thumbnail fluid" />
+                    alt="" className={`videoHorizon__thumbnail fluid ${thumbnail}`} />
             </Col>
             <Col xs={6} md={8} className="videoHorizon__details">
 

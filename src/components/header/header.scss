@@ -5,12 +5,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 1rem 0.7rem;
     box-shadow: $box-shadow;
-    position: sticky;
+    position: fixed;
     top: 0;
     z-index: 999;
     background-color: $light-color;
+    height: 10vh;
+    width: 100%;
 
     &__user-info {
         font-size: 1.2rem;
@@ -25,17 +27,18 @@
 }
 
 .logo {
-    width: 50px;
-    height: 50px;
+    // media 50px
+    width: 30px;
+    height: 30px;
     object-fit: contain;
 }
 
 .search {
     display: flex;
-    flex: 0.7;
+    flex: 0.9;
     padding: 0.1rem;
-    border-radius: 12px;
-    margin: 0 2rem;
+    border-radius: 8px;
+    margin: 0 1rem;
     font-weight: 500;
     border: 2px solid;
     background-color: #343A40;
@@ -44,7 +47,7 @@
 .search__input {
     width: 100%;
     border-radius: 10px;
-    padding: 0.4rem;
+    padding: 0.3rem;
     border: none;
     color: $primary-color;
     background: transparent;
@@ -58,7 +61,6 @@
 }
 
 .search__button {
-
     padding: 0 1.25rem;
     border: none;
     color: $primary-color;

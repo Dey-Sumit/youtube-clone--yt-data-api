@@ -1,5 +1,5 @@
 import request from '../../api';
-import { SET_VIDEOS_ERRORS, SET_POPULAR_VIDEOS, SET_RELATED_VIDEOS, SET_VIDEOS, SET_VIDEO } from '../types'
+import { SET_VIDEOS_ERRORS, SET_POPULAR_VIDEOS, SET_RELATED_VIDEOS, SET_VIDEOS, SET_VIDEO, SET_SUBSCRIPTIONS_VIDEOS } from '../types'
 
 export const getRelatedVideos = (videoId) => async dispatch => {
     console.log("request getCommentsOfVideoById");
@@ -43,6 +43,7 @@ export const searchVideos = (q) => async dispatch => {
             type: SET_VIDEOS,
             payload: data.items
         })
+
     } catch (error) {
         console.log(error);
         dispatch({
@@ -122,3 +123,43 @@ export const getVideoById = (videoId) => async (dispatch, getState) => {
 
 }
 
+export const getSubscriptionsVideos = () => async (dispatch, getState) => {
+    console.log("request video of subs");
+
+    // if(getState.videos.nextPageToken!==null){
+
+    // }
+
+    try {
+        const { data } = await request('/subscriptions', {
+            params: {
+                mine: true,
+                part: 'contentDetails,snippet,subscriberSnippet',
+                maxResults: 10,
+                pageToken: getState().videos.nextPageToken
+            },
+            headers: { 'Authorization': `Bearer ${getState().auth.accessToken}` }
+
+        })
+        const { items, nextPageToken } = data
+        // console.log(items, nextPageToken);
+
+        dispatch({
+            type: SET_SUBSCRIPTIONS_VIDEOS,
+            payload: {
+                videos: items,
+                nextPageToken: nextPageToken
+            }
+        })
+
+
+    } catch (error) {
+        console.log(error);
+        console.log(error.message);
+        dispatch({
+            type: SET_VIDEOS_ERRORS,
+            payload: error.message
+        })
+    }
+
+}

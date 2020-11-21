@@ -20,26 +20,23 @@ const HomeScreen = () => {
 
     const history = useHistory()
     const [page, setPage] = useState(1)
+
     useEffect(() => {
 
+        // handle private route
         if (!accessToken) {
             history.push('/auth')
         }
         else {
             console.log("called-------");
-            // dispatch(fetchPopularVideos())
+            dispatch(fetchPopularVideos())
         }
     }, [history, page, dispatch, accessToken])
-    console.log(videos);
 
     return (
 
         <Container className="main">
             <CategoriesBar />
-
-            <h4>Recommended Videos</h4>
-
-
             {
                 videos.length > 0 &&
                 (<InfiniteScroll
@@ -52,15 +49,18 @@ const HomeScreen = () => {
                             <b>Yay! You have seen it all</b>
                         </p>
                     }
-                > <Row className="mt-4">
-                        {
-                            videos.map(video =>
-                                <Col md={4} lg={3}>
-                                    <Video key={video.etag} video={video} />
-                                </Col>
-                            )
-                        }
-                    </Row>
+                >
+                    <Container>
+                        <Row className="mt-4">
+                            {
+                                videos.map(video =>
+                                    <Col md={4} lg={3}>
+                                        <Video key={video.etag} video={video} />
+                                    </Col>
+                                )
+                            }
+                        </Row>
+                    </Container>
                 </InfiniteScroll>
                 )
             }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 
@@ -12,18 +12,29 @@ import './app.scss'
 import WatchScreen from './screens/watchScreen/WatchScreen'
 import SearchResultsScreen from './screens/searchResultsScreen/SearchResultsScreen'
 import Header from './components/header/Header'
+import Subscriptions from './screens/subscriptions/Subscriptions'
+import ChannelScreen from './screens/channelScreen/ChannelScreen'
 
 
 
 const Layout = ({ children }) => {
+
+    const [showSidebar, setShowSidebar] = useState(false)
+
+    const toggleShowSidebar = () => {
+        setShowSidebar(value => !value)
+    }
+
     return (
-        <>
-            <Header />
+        <Container fluid className="p-0">
+            <Header toggleShowSidebar={toggleShowSidebar} />
             <div className="app__container">
-                <Sidebar />
-                {children}
+                {<Sidebar showSidebar={showSidebar} />}
+                <Container fluid>
+                    {children}
+                </Container>
             </div>
-        </>
+        </Container>
     )
 
 }
@@ -61,6 +72,16 @@ const App = () => {
             <Route path="/search/:search_query" exact>
                 <Layout>
                     <SearchResultsScreen />
+                </Layout>
+            </Route>
+            <Route path="/feed/subscriptions" exact>
+                <Layout>
+                    <Subscriptions />
+                </Layout>
+            </Route>
+            <Route path="/channel/:channelId" exact>
+                <Layout>
+                    <ChannelScreen />
                 </Layout>
             </Route>
 

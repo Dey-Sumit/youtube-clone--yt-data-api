@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
@@ -18,9 +18,15 @@ const SearchResultsScreen = () => {
     // useEffect(() => {
     //     dispatch(fetchPopularVideos())
     // }, [dispatch])
+
+    const [page, setPage] = useState(1)
+
     useEffect(() => {
+        console.log("called-------");
         dispatch(searchVideos(search_query))
-    }, [dispatch, search_query])
+    }, [search_query, page, dispatch])
+
+    console.log(videos);
 
     return (
         <Container fluid className="main">

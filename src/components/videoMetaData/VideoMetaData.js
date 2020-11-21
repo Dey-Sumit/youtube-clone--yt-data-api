@@ -19,6 +19,7 @@ const VideoMetaData = ({ video: { snippet, statistics } }) => {
             <div className="videoMetaData__middle">
                 <div className="videoMetaData__channel">
                     <img src="" alt="" />
+                    <span>{channelTitle}</span>
                     <span>subs</span>
                     <button>Subscribe</button>
                 </div>

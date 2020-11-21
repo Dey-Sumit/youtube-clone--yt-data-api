@@ -1,23 +1,17 @@
 import React from 'react'
 import GoogleLogin from 'react-google-login';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { LOGIN_SUCCESS } from '../../redux/types';
+import { login } from '../../redux/actions/auth.action';
 
 const LoginButton = ({ scope }) => {
     const dispatch = useDispatch()
 
     const responseGoogle = (res) => {
-        console.log("fired");
-        const { accessToken, profileObj } = res
-        console.log(res);
-        dispatch(
-            {
-                type: LOGIN_SUCCESS,
-                payload: accessToken
-            })
+        dispatch(login())
     }
+
     const handleError = (res) => console.log("error", res);
+
     return (
 
         <GoogleLogin

@@ -1,13 +1,25 @@
 .videoHorizon {
-    padding: 2rem;
+    padding: 3rem;
     width: 100%;
     cursor: pointer;
+    box-shadow: 5px 5px 10px #090a0b, -5px -5px 10px #23262b;
+    border-radius: 10px;
+    margin: 0.7rem;
+
+    &__left {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
 
     &__thumbnail {
-        margin-right: 1rem;
         background-color: #aaa;
         width: 100%;
         object-fit: contain;
+        border-radius: 10px;
+        width: 60%;
+        border-radius: 50%;
     }
 
     &__details {
