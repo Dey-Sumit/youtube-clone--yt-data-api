@@ -1,7 +1,7 @@
 import React from 'react'
 import { FiHome } from 'react-icons/fi'
 import { AiOutlineFire, AiFillYoutube } from 'react-icons/ai'
-import { MdSubscriptions, MdExitToApp } from 'react-icons/md'
+import { MdSubscriptions, MdExitToApp, MdThumbUp } from 'react-icons/md'
 
 import './sidebar.scss'
 import SidebarItem from '../sidebarItem/SidebarItem'
@@ -21,12 +21,20 @@ const Sidebar = ({ showSidebar }) => {
     return (
 
         <div className={showSidebar ? 'sidebar open' : 'sidebar'}>
-            <SidebarItem Icon={AiFillYoutube} text="Youtube Redesign" />
             <SidebarItem Icon={FiHome} text="Home" />
-            <SidebarItem Icon={AiOutlineFire} text="Trending" />
+
+            <Link to="/feed/subscriptions">
+                <SidebarItem Icon={AiOutlineFire} text="Explore" />
+            </Link>
+
             <Link to="/feed/subscriptions">
                 <SidebarItem Icon={MdSubscriptions} text="Subscription" />
             </Link>
+
+            <Link to="/feed/likedVideos">
+                <SidebarItem Icon={MdThumbUp} text="Liked Videos" />
+            </Link>
+
             <hr />
             <div onClick={handleLogout} >
                 <SidebarItem Icon={MdExitToApp} text="Log Out" />

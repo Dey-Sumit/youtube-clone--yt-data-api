@@ -14,6 +14,7 @@ import SearchResultsScreen from './screens/searchResultsScreen/SearchResultsScre
 import Header from './components/header/Header'
 import Subscriptions from './screens/subscriptions/Subscriptions'
 import ChannelScreen from './screens/channelScreen/ChannelScreen'
+import LikedVideosScreen from './screens/likedVideos/LikedVideos'
 
 
 
@@ -77,6 +78,11 @@ const App = () => {
             <Route path="/feed/subscriptions" exact>
                 <Layout>
                     <Subscriptions />
+                </Layout>
+            </Route>
+            <Route path="/feed/likedVideos" exact>
+                <Layout>
+                    <LikedVideosScreen />
                 </Layout>
             </Route>
             <Route path="/channel/:channelId" exact>

@@ -1,8 +1,8 @@
-import { LOGIN_SUCCESS, LOGOUT, } from "../types"
+import { LOGIN_SUCCESS, LOGOUT, SET_PROFILE, } from "../types"
 
 const initialState = {
     accessToken: localStorage.getItem("yt-access-token") ? localStorage.getItem("yt-access-token") : null,
-    user: null
+    user: localStorage.getItem("yt-user") ? localStorage.getItem("yt-user") : null
 }
 
 export const authReducer = (state = initialState, action) => {
@@ -14,13 +14,20 @@ export const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 // shift this to access creator
-                access_token: payload
+                accessToken: payload
             }
+        case SET_PROFILE:
+            localStorage.setItem("yt-user", payload)
+            return {
+                ...state,
+                user: payload
+            }
+
         case LOGOUT:
             return {
                 ...state,
                 // shift this to access creator
-                access_token: null,
+                accessToken: null,
                 user: null
             }
         default:

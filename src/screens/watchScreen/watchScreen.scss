@@ -1,0 +1,35 @@
+.commentInput {
+    margin: 1rem 0;
+
+    img {
+        background-color: azure;
+        border-radius: 50%;
+        width: 50px;
+    }
+
+    input {
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid #fff;
+        color: #fff;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    button {
+        padding: 0.5rem 0.7rem;
+        border: none;
+        background-color: #002ec5;
+        font-weight: 400;
+        font-weight: 500;
+        color: #fff;
+        border-radius: 1px;
+
+        &:focus {
+            border: none;
+            outline: none;
+        }
+    }
+}

@@ -2,7 +2,7 @@ import { LOGIN_SUCCESS, LOGOUT, SET_PROFILE } from "../types"
 
 
 export const login = (data) => dispatch => {
-
+    console.log(data);
     const { accessToken, profileObj } = data
 
     dispatch({

@@ -12,7 +12,7 @@ const Header = ({ toggleShowSidebar }) => {
     const history = useHistory()
 
     const dispatch = useDispatch()
-    const profileObj = useSelector(state => state.auth.profileObj)
+    const user = useSelector(state => state.auth.user)
 
     const handleSearch = (e) => {
         e.preventDefault()
@@ -34,8 +34,8 @@ const Header = ({ toggleShowSidebar }) => {
                 </button>
             </form>
             <div className="header__user-info">
-                {/* only large screen <span className="mr-3">Sumit Dey</span> */}
-                <img src="http://unsplash.it/36/36?gravity=center" alt="" />
+                {/* only large screen <span className="mr-3">{user.givenName}</span> */}
+                <img src={user.imageUrl} alt="" className="fluid" />
             </div>
         </div>
 

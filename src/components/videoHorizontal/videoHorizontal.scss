@@ -15,11 +15,16 @@
 
     &__thumbnail {
         background-color: #aaa;
-        width: 100%;
         object-fit: contain;
         border-radius: 10px;
         width: 60%;
-        border-radius: 50%;
+
+        &-video {}
+
+        &-channel {
+            border-radius: 50%;
+
+        }
     }
 
     &__details {

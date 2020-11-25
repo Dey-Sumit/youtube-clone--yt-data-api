@@ -7,7 +7,7 @@ const LoginButton = ({ scope }) => {
     const dispatch = useDispatch()
 
     const responseGoogle = (res) => {
-        dispatch(login())
+        dispatch(login(res))
     }
 
     const handleError = (res) => console.log("error", res);

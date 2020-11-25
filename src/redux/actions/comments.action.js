@@ -1,5 +1,5 @@
 import request from "../../api";
-import { SET_COMMENTS, SET_COMMENTS_ERRORS } from "../types";
+import { CREATE_COMMENT_FAILED, CREATE_COMMENT_REQUEST, CREATE_COMMENT_SUCCESS, SET_COMMENTS, SET_COMMENTS_ERRORS } from "../types";
 
 export const getCommentsOfVideoById = (videoId) => async dispatch => {
     console.log("request getCommentsOfVideoById");
@@ -26,28 +26,39 @@ export const getCommentsOfVideoById = (videoId) => async dispatch => {
     }
 }
 
-export const addComment = (obj) => async (dispatch, getState) => {
-    console.log("request addComment");
-    console.log(getState().auth.accessToken);
+export const addComment = (id, text) => async (dispatch, getState) => {
+
+    dispatch({
+        type: CREATE_COMMENT_REQUEST
+    })
+    const obj = {
+        "snippet": {
+            "videoId": id,
+            "topLevelComment": {
+                "snippet": {
+                    "textOriginal": text
+                }
+            }
+        }
+    }
     try {
-        const { data } = await request.post('/commentThreads', obj, {
+        await request.post('/commentThreads', obj, {
             params: {
                 part: 'snippet',
             },
             headers: { 'Authorization': `Bearer ${getState().auth.accessToken}` }
 
         })
-        console.log(data);
-        // const comments = data.items.videos.map(video => video.snippet)
-        // const comments = data.items.videos.map(video => video.snippet)
-        // dispatch({
-        //     type: SET_COMMENTS,
-        //     payload: data.items
-        // })
+        dispatch({
+            type: CREATE_COMMENT_SUCCESS
+        })
+
+        //TODO loadComments()
+        dispatch(getCommentsOfVideoById(id))
     } catch (error) {
         console.log(error);
         dispatch({
-            type: SET_COMMENTS_ERRORS,
+            type: CREATE_COMMENT_FAILED,
             payload: error.message
         })
     }

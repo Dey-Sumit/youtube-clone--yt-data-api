@@ -17,6 +17,17 @@
         margin-bottom: 0.5rem;
     }
 
+    &__duration {
+        padding: 0.1rem 0.2rem;
+        background: #000000c9;
+        border-radius: 3px;
+        right: 1.8rem;
+        top: 7rem;
+        font-size: 0.9rem;
+        position: absolute;
+        font-weight: 500;
+    }
+
     &__bottom {}
 
     &__channel-icon {

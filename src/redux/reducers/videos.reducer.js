@@ -1,10 +1,11 @@
-import { SET_VIDEOS_ERRORS, SET_POPULAR_VIDEOS, SET_RELATED_VIDEOS, SET_VIDEOS, SET_VIDEO, SET_SUBSCRIPTIONS_VIDEOS } from "../types"
+import { SET_VIDEOS_ERRORS, SET_POPULAR_VIDEOS, SET_RELATED_VIDEOS, SET_VIDEOS, SET_VIDEO, SET_SUBSCRIPTIONS_VIDEOS, LIKED_VIDEOS_SUCCESS, LIKED_VIDEOS_REQUEST, LIKED_VIDEOS_FAILED } from "../types"
 
 const initialState = {
     videos: [],
     popularVideos: [],
     subscriptionVideos: [],
-    relatedVideos: null,
+    likedVideos: [],
+    relatedVideos: [],
     loading: false,
     errors: null,
     nextPageToken: null,
@@ -19,8 +20,10 @@ export const videosReducer = (state = initialState, action) => {
         case SET_VIDEOS:
             return {
                 ...state,
-                videos: payload
+                videos: payload,
+                error: null
             }
+
         case SET_POPULAR_VIDEOS:
             console.log(state.popularVideos);
             return {
@@ -54,4 +57,43 @@ export const videosReducer = (state = initialState, action) => {
         default:
             return state
     }
+}
+
+
+export const likedVideosReducer = (state = { loading: true, videos: [] }, action) => {
+    const { type, payload } = action
+
+    switch (type) {
+        case LIKED_VIDEOS_SUCCESS:
+
+            return {
+                ...state,
+                videos: payload.videos,
+                loading: false,
+                error: null
+            }
+
+        case LIKED_VIDEOS_REQUEST:
+            return {
+                ...state,
+                loading: true,
+
+            }
+
+        case LIKED_VIDEOS_FAILED:
+            return {
+                ...state,
+                loading: false,
+                error: payload
+
+            }
+
+
+        default:
+            return state
+    }
+}
+
+export const rateVideosReducer = (state = {}, action) => {
+
 }

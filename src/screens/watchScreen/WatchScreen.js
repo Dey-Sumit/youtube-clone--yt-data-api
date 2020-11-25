@@ -9,6 +9,8 @@ import VideoMetaData from '../../components/videoMetaData/VideoMetaData';
 import { addComment, getCommentsOfVideoById, } from '../../redux/actions/comments.action';
 import { getVideoById, getRelatedVideos } from '../../redux/actions/videos.action';
 
+import './watchScreen.scss'
+
 const WatchScreen = () => {
 
     const { id } = useParams()
@@ -17,14 +19,17 @@ const WatchScreen = () => {
     const video = useSelector(state => state.videos.video)
     const loading = useSelector(state => state.videos.loading)
     const comments = useSelector(state => state.comments.comments)
-    console.log(video);
+
+    const { loading: commentCreatedLoading, success: commentCreatedSuccess } = useSelector(state => state.createComment)
 
     useEffect(() => {
-        dispatch(getRelatedVideos())
+        dispatch(getRelatedVideos(id))
     }, [dispatch, id])
+
     useEffect(() => {
         dispatch(getCommentsOfVideoById(id))
     }, [dispatch, id])
+
     useEffect(() => {
         dispatch(getVideoById(id))
     }, [dispatch, id])
@@ -35,8 +40,9 @@ const WatchScreen = () => {
     //TODO comments might be empty array
     const rawComments = comments?.map(comment => comment.snippet.topLevelComment.snippet)
 
+
     const opts = {
-        height: '400',
+        height: '530',
         width: '100%',
         playerVars: {
             // https://developers.google.com/youtube/player_parameters
@@ -50,33 +56,34 @@ const WatchScreen = () => {
     const handleComment = (e) => {
         e.preventDefault()
         if (input.length === 0) return
-        const obj = {
-            "snippet": {
-                "videoId": id,
-                "topLevelComment": {
-                    "snippet": {
-                        "textOriginal": input
-                    }
-                }
-            }
+
+
+        dispatch(addComment(id, input))
+        if (!commentCreatedLoading && commentCreatedSuccess) {
+            setInput('')
         }
 
-        dispatch(addComment(obj))
+
     }
     return (
         <Container fluid>
             <Row>
                 <Col lg={8}>
                     <YouTube videoId={id} opts={opts} onReady={_onReady} />
-                    <VideoMetaData video={video} />
+                    {video && <VideoMetaData video={video} videoId={id} />}
                     {/* desccription */}
                     {/* comments section */}
 
-                    <form onSubmit={handleComment}>
-                        <input type="text" placeholder="write a comment"
-                            value={input} onChange={e => setInput(e.target.value)} />
-                        <button type="submit">Comment</button>
-                    </form>
+                    <div className="commentInput">
+                        <img src="" alt="" />
+                        <form onSubmit={handleComment}>
+                            <input type="text" placeholder="write a comment"
+                                value={input} onChange={e => setInput(e.target.value)} />
+                            <button type="submit">Comment</button>
+                        </form>
+
+                    </div>
+
 
                     {
                         rawComments?.length > 0 &&
@@ -86,7 +93,7 @@ const WatchScreen = () => {
 
                 </Col>
                 <Col lg={4}>
-                    {relatedVideos &&
+                    {relatedVideos?.length > 0 &&
                         relatedVideos.map(video =>
                             <VideoHorizontal video={video} key={video.etag} />
                         )
