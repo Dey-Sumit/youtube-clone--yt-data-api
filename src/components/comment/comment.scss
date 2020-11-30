@@ -1,6 +1,9 @@
 .comment {
     padding: 0.5rem;
     display: flex;
+    font-size: 0.9rem;
+    align-items: center;
+    border-bottom: 0.1px solid #4c4c4c;
 
     img {
         border-radius: 50%;
@@ -13,4 +16,5 @@
         font-weight: 500;
         margin-bottom: 0.5rem;
     }
+
 }

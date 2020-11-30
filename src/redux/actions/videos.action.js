@@ -1,5 +1,5 @@
 import request from '../../api';
-import { SET_VIDEOS_ERRORS, SET_POPULAR_VIDEOS, SET_RELATED_VIDEOS, SET_VIDEOS, SET_VIDEO, SET_SUBSCRIPTIONS_VIDEOS, LIKED_VIDEOS_SUCCESS, LIKED_VIDEOS_FAILED, LIKED_VIDEOS_REQUEST } from '../types'
+import { SET_VIDEOS_ERRORS, SET_RELATED_VIDEOS, SET_VIDEOS, SET_VIDEO, SET_SUBSCRIPTIONS_VIDEOS, LIKED_VIDEOS_SUCCESS, LIKED_VIDEOS_FAILED, LIKED_VIDEOS_REQUEST } from '../types'
 
 export const getRelatedVideos = (videoId) => async dispatch => {
 
@@ -8,10 +8,10 @@ export const getRelatedVideos = (videoId) => async dispatch => {
             params: {
                 part: 'snippet',
                 relatedToVideoId: videoId,
-                type: 'video'
+                type: 'video',
+                maxResults: 15
             }
         })
-        console.log(data);
         dispatch({
             type: SET_RELATED_VIDEOS,
             payload: data.items
@@ -25,25 +25,27 @@ export const getRelatedVideos = (videoId) => async dispatch => {
         })
     }
 }
+// make separate reducers
 
-
-
-
-export const searchVideos = (q) => async dispatch => {
-    console.log("request searchVideos");
-
+export const searchVideos = (q, type = 'channel,video') => async (dispatch, getState) => {
     try {
         const { data } = await request('/search', {
             params: {
                 part: 'snippet',
                 q,
-                type: 'channel,video'
+                type: type,
+                pageToken: getState().videos.nextPageToken
             }
         })
+
         dispatch({
             type: SET_VIDEOS,
-            payload: data.items
+            payload: {
+                videos: data.items,
+                nextPageToken: data.nextPageToken
+            }
         })
+        console.log(data);
 
     } catch (error) {
         console.log(error);
@@ -57,7 +59,6 @@ export const searchVideos = (q) => async dispatch => {
 
 
 export const fetchPopularVideos = () => async (dispatch, getState) => {
-    console.log("request fetchPopularVideos");
 
     // if(getState.videos.nextPageToken!==null){
 
@@ -73,9 +74,8 @@ export const fetchPopularVideos = () => async (dispatch, getState) => {
                 pageToken: getState().videos.nextPageToken
             }
         })
-        console.log(data);
         dispatch({
-            type: SET_POPULAR_VIDEOS,
+            type: SET_VIDEOS,
             payload: {
                 videos: data.items,
                 nextPageToken: data.nextPageToken
@@ -93,7 +93,6 @@ export const fetchPopularVideos = () => async (dispatch, getState) => {
 
 }
 export const getVideoById = (videoId) => async (dispatch, getState) => {
-    console.log("request video by id");
 
     // if(getState.videos.nextPageToken!==null){
 
@@ -106,7 +105,6 @@ export const getVideoById = (videoId) => async (dispatch, getState) => {
                 id: videoId
             }
         })
-        console.log(data);
         dispatch({
             type: SET_VIDEO,
             payload: data.items[0]

@@ -1,20 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+$primary-color:#b1bde4;
+$light-color:#15161A;
+$background:#16181B;
+$borderColor:#4c4c4c;
+$box-shadow:12;
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    // font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Roboto', sans-serif;
 
 }
 
 body {
-    background: #16181B;
+    background: $background;
     background-attachment: fixed;
     color: #b1bde4;
 }
 
-$primary-color:#b1bde4;
-$light-color:#15161A;
-$box-shadow:12;
+
 
 ::-webkit-scrollbar {
     width: 0px;
@@ -23,13 +30,17 @@ $box-shadow:12;
     /* Optional: just make scrollbar invisible */
 }
 
-.login {
-    width: 100%;
-    height: 50%;
-    background: transparent;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    color: #fff;
+a {
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+@mixin line-clamp($number) {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: $number;
+    -webkit-box-orient: vertical;
 }

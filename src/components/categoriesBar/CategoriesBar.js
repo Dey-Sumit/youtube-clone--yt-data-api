@@ -1,24 +1,25 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { searchVideos } from '../../redux/actions/videos.action'
 import './categoriesBar.scss'
 
+const keywords = ["React", "Angular", "React Native", "use of API", "Redux", "Music", "Algorithm Art ", "Guitar", "Bengali Songs", "Coding", "Cricket", "Football", "Real Madrid"]
+
+
+
+
 const CategoriesBar = () => {
+
+    const dispatch = useDispatch()
+
     return (
         <div className="categories">
             <section className="category-section">
+                {/* //change button to span */}
                 <button className="category active">All</button>
-                <button className="category">Category 1</button>
-                <button className="category">Category 2</button>
-                <button className="category">Category 3</button>
-                <button className="category">Category 4</button>
-                <button className="category">Category 5</button>
-                <button className="category">Category 6</button>
-                <button className="category">Category 7</button>
-                <button className="category">Category 8</button>
-                <button className="category">Category 5</button>
-                <button className="category">Category 6</button>
-                <button className="category">Category 7</button>
-                <button className="category">Category 8</button>
-
+                {keywords.map((word, i) => <button key={i} className="category"
+                    onClick={() => dispatch(searchVideos(word, "video"))}>
+                    {word}</button>)}
             </section>
         </div>
     )

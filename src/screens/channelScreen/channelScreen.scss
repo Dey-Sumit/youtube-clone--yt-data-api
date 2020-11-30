@@ -1,0 +1,42 @@
+.channelHeader {
+    padding: 2rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #181818;
+
+    &__left {
+        display: flex;
+        align-items: center;
+
+        img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+        }
+
+        &__details {
+            margin-left: 1rem;
+
+            h3 {
+                font-size: 24px;
+                line-height: 30px;
+            }
+
+            span {
+                font-size: 16px;
+            }
+        }
+    }
+
+    &__right {
+        button {
+            text-transform: uppercase;
+            background-color: red;
+            color: #fff;
+            font-size: 14px;
+            padding: 0.4rem;
+            border: none;
+        }
+    }
+}

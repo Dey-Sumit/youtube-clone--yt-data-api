@@ -2,25 +2,19 @@
 
 .sidebar {
     color: #b1bde4;
-    background: #51146d;
+    //TODO change
+    background: #121417;
     box-shadow: $box-shadow;
     display: flex;
     flex-direction: column;
-    // width: 100px;
-    // width: 260px;
-    width: 80px;
-    padding: 1rem;
+
+    width: 250px;
     height: 90vh;
-    position: fixed;
+    position: sticky;
+    //TODO is TOP,left needed?
     top: 10vh;
     left: 0;
-    z-index: 1000;
-    transform: translateX(-100%);
     transition: all 0.2s ease-out;
-
-    span {
-        display: none;
-    }
 
     &.open {
         transform: translateX(0);
@@ -32,23 +26,28 @@
     height: 60px;
 }
 
-// @media(max-width:777px) {
-//     .sidebar span {
-//         display: none;
-//         font-size: 22px;
-//     }
-// }
 
-@media(min-width:1100px) {
-    // .sidebar {
-    //     width: 250px;
-    //     position: static;
-    //     top: 10vh;
-    // }
+@media(max-width:1224px) {
+    .sidebar {
+        width: 90px;
+    }
 
-    .sidebar span {}
+    .sidebar span {
+        display: none;
+    }
 }
 
+@media(max-width:520px) {
+    .sidebar {
+        transform: translateX(-100%);
+        position: fixed;
+        z-index: 999;
+    }
+
+    .sidebar span {
+        display: none;
+    }
+}
 
 hr {
     background-color: #b1bde4;

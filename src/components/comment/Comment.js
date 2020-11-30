@@ -9,7 +9,7 @@ const Comment = ({ comment: { authorChannelId, authorDisplayName, authorProfileI
             <img src={authorProfileImageUrl} alt="name" />
             <div className="comment__info">
                 <div className="comment__header">
-                    <span className="comment__author">{authorDisplayName}   </span>
+                    <span className="comment__author">{authorDisplayName}  •    </span>
                     <span className="comment__date">{moment(publishedAt).fromNow()}</span>
 
                 </div>

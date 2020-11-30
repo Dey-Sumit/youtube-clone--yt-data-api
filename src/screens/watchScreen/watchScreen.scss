@@ -1,5 +1,7 @@
 .commentInput {
     margin: 1rem 0;
+    display: flex;
+    width: 100%;
 
     img {
         background-color: azure;
@@ -7,11 +9,17 @@
         width: 50px;
     }
 
+    form {
+        display: flex;
+
+    }
+
     input {
         background: transparent;
         border: none;
         border-bottom: 1px solid #fff;
         color: #fff;
+        flex: 1;
 
         &:focus {
             outline: none;
@@ -19,10 +27,9 @@
     }
 
     button {
-        padding: 0.5rem 0.7rem;
         border: none;
-        background-color: #002ec5;
-        font-weight: 400;
+        padding: 0.5rem 0.7rem;
+        background-color: #353946;
         font-weight: 500;
         color: #fff;
         border-radius: 1px;
@@ -31,5 +38,11 @@
             border: none;
             outline: none;
         }
+    }
+}
+
+@media(max-width:720px) {
+    iframe {
+        height: 350px;
     }
 }

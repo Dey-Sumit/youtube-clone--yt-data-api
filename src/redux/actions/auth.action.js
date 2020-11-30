@@ -19,6 +19,7 @@ export const login = (data) => dispatch => {
 export const logout = () => dispatch => {
 
     localStorage.removeItem('yt-access-token')
+    localStorage.removeItem('yt-user')
     dispatch({
         type: LOGOUT
     })

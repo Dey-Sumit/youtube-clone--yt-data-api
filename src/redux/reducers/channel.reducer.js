@@ -1,6 +1,6 @@
-import { CHANNEL_DETAILS_FAIL, CHANNEL_DETAILS_REQUEST, CHANNEL_DETAILS_SUCCESS, CHANNEL_SUBSCRIPTION_STATUS } from "../types"
+import { CHANNEL_DETAILS_FAIL, CHANNEL_DETAILS_REQUEST, CHANNEL_DETAILS_SUCCESS, CHANNEL_SUBSCRIPTION_STATUS, CHANNEL_VIDEOS_REQUEST, CHANNEL_VIDEOS_SUCCESS } from "../types"
 
-export const channelReducer = (state = { channel: {}, loading: true, subscriptionStatus: null }, action) => {
+export const channelReducer = (state = { channel: {}, loading: true, subscriptionStatus: null, videos: null }, action) => {
     const { type, payload } = action
 
     switch (type) {
@@ -27,6 +27,17 @@ export const channelReducer = (state = { channel: {}, loading: true, subscriptio
             return {
                 ...state,
                 subscriptionStatus: payload
+            }
+        case CHANNEL_VIDEOS_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case CHANNEL_VIDEOS_SUCCESS:
+            return {
+                ...state,
+                videos: payload,
+                loading: false,
             }
         default:
             return state

@@ -2,122 +2,60 @@
 
 .video {
 
-    // background: linear-gradient(145deg, #181a1d, #141618);
-    // box-shadow: 5px 5px 10px #090a0b,
-    //     -5px -5px 10px #23262b;
-    background: linear-gradient(145deg, #24272a, #24272a);
-    box-shadow: 5px 5px 14px #101113, -5px -5px 14px #1c1f23;
+    //TODO put in variable
+    background: #282a31;
+
     margin-bottom: 1rem;
     padding: 0.7rem;
-    border-radius: 10px;
+    border-radius: 8px;
+    font-weight: 500;
     cursor: pointer;
 
     &__thumbnail {
-        width: 100%;
+        position: relative;
         margin-bottom: 0.5rem;
+
+        img {
+            width: 100%;
+        }
     }
 
     &__duration {
         padding: 0.1rem 0.2rem;
         background: #000000c9;
         border-radius: 3px;
-        right: 1.8rem;
-        top: 7rem;
+        bottom: 0.3rem;
+        right: 0.3rem;
         font-size: 0.9rem;
         position: absolute;
-        font-weight: 500;
-    }
-
-    &__bottom {}
-
-    &__channel-icon {
-        width: 36px;
-        height: 36px;
-        object-fit: contain;
-        margin-right: 1rem;
-        background-color: #aaa;
-        border-radius: 50%;
-
-    }
-
-    &__title {
-        font-size: 0.9rem;
-        font-weight: 500;
-        text-decoration: none;
-        margin-bottom: 1px;
-        color: #fff;
-        letter-spacing: 0.1px;
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical;
     }
 
     &__channel {
         display: flex;
-        align-content: center;
-        text-decoration: none;
-        transition: color 150ms;
-        margin: 6px 0;
+        align-items: center;
+        margin: 0.5rem 0;
+
+        img {
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
+            margin-right: 0.5rem;
+            background-color: #aaa;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        &__name {
+            @include line-clamp(1);
+        }
     }
 
+    &__title {
+        font-size: 0.9rem;
+        margin-bottom: 0.1rem;
+        color: #fff;
+        letter-spacing: 0.1px;
+        @include line-clamp(1);
+    }
 
 }
-
-// @media (max-width:777px) {
-//     .video {
-//         width: 100%
-//     }
-// }
-
-// .video__thumbnail {
-//     width: 100%;
-//     object-fit: contain;
-//     background-color: #aaa;
-// }
-
-
-// .video__bottom {
-//     display: flex;
-//     align-items: flex-start;
-//     margin-top: 1rem;
-// }
-
-// .video__channel-icon {
-//     width: 36px;
-//     height: 36px;
-//     object-fit: contain;
-//     margin-right: 1rem;
-//     background-color: #aaa;
-//     border-radius: 50%;
-
-// }
-
-// .video__details {
-//     display: flex;
-//     flex-direction: column;
-
-// }
-
-
-
-// .video__title {
-//     font-size: 1.1rem;
-//     font-weight: bold;
-//     text-decoration: none;
-//     margin-bottom: 1px;
-//     color: #fff;
-//     letter-spacing: 0.5px;
-// }
-
-// .video__channel-name {
-//     text-decoration: none;
-//     transition: color 150ms;
-//     margin-bottom: 1px;
-
-// }
-
-// .video__channel-name:hover {}
-
-// .video__channel-name,
-// .video-metadata {}

@@ -39,7 +39,7 @@ const VideoMetaData = ({ video: { snippet, statistics }, videoId }) => {
     return (
         <div className="videoMetaData">
             <div className="videoMetaData__top py-2">
-                <h6>{title}</h6>
+                <h5>{title}</h5>
                 <div className="videoMetaData__stats">
                     <div className="videoMetaData__left">
 
@@ -59,8 +59,8 @@ const VideoMetaData = ({ video: { snippet, statistics }, videoId }) => {
                         <span>{channelTitle}</span>
                     </div>
                     <div className="videoMetaData__channel__right">
-                        <span>{numeral(channelStatistics?.subscriberCount).format('0.0a')} Subscribers</span>
                         <button>{subscriptionStatus ? "Subscribed" : "Subscribe"}</button>
+                        <span>{numeral(channelStatistics?.subscriberCount).format('0.0a')} Subscribers</span>
                     </div>
                 </div>
                 <div className="videoMetaData__description">

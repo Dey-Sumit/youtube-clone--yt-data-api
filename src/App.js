@@ -15,12 +15,15 @@ import Header from './components/header/Header'
 import Subscriptions from './screens/subscriptions/Subscriptions'
 import ChannelScreen from './screens/channelScreen/ChannelScreen'
 import LikedVideosScreen from './screens/likedVideos/LikedVideos'
+import { useWindowWidth } from '@react-hook/window-size'
 
 
 
 const Layout = ({ children }) => {
 
     const [showSidebar, setShowSidebar] = useState(false)
+
+
 
     const toggleShowSidebar = () => {
         setShowSidebar(value => !value)
@@ -30,7 +33,8 @@ const Layout = ({ children }) => {
         <Container fluid className="p-0">
             <Header toggleShowSidebar={toggleShowSidebar} />
             <div className="app__container">
-                {<Sidebar showSidebar={showSidebar} />}
+                {/* {<Sidebar  />} */}
+                <Sidebar showSidebar={showSidebar} />
                 <Container fluid>
                     {children}
                 </Container>

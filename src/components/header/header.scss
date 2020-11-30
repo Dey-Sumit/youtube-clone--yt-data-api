@@ -10,9 +10,13 @@
     position: fixed;
     top: 0;
     z-index: 999;
-    background-color: $light-color;
+    background-color: $background;
     height: 10vh;
     width: 100%;
+
+    &__menu {
+        display: none;
+    }
 
     &__user-info {
         font-size: 1.2rem;
@@ -27,12 +31,26 @@
 
 }
 
-.logo {
+
+.header__logo {
     // media 50px
     width: 30px;
     height: 30px;
     object-fit: contain;
+    display: block;
 }
+
+@media(max-width:520px) {
+    .header__menu {
+        display: block;
+    }
+
+    .header__logo {
+        display: none;
+    }
+}
+
+
 
 .search {
     display: flex;

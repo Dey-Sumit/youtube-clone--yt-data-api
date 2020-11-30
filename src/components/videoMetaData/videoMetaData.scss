@@ -1,3 +1,5 @@
+@import '../../base.scss';
+
 .videoMetaData {
     &__description {
         font-size: 0.9rem;
@@ -5,16 +7,12 @@
         white-space: pre-line;
         border-bottom: 0.2px solid;
 
-
-
         .showMoreText {
             display: block;
             margin: 1rem 0;
             color: azure;
             font-weight: 600;
             text-decoration: none;
-
-
         }
     }
 
@@ -27,7 +25,6 @@
 
 .videoMetaData__stats {
     padding: 0.5rem 0;
-    border-bottom: 0.2px solid;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -40,11 +37,15 @@
 .videoMetaData__right {}
 
 .videoMetaData__channel {
-    font-weight: 400;
+    letter-spacing: 0.3px;
+    font-weight: 500;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0.5rem 0;
+    margin: 0.2rem 0;
+    padding: 0.5rem 0;
+    border-top: 1px solid;
+    border-bottom: 1px solid $borderColor;
 
     img {
         width: 50px;
@@ -53,16 +54,31 @@
     }
 
     button {
-        padding: 0.5rem 0.7rem;
-        margin: 0 1rem;
-        font-weight: 500;
-        background: red;
-        border: none;
-        border-radius: 5px;
+        text-transform: uppercase;
+        background-color: red;
         color: #fff;
+        font-size: 14px;
+        padding: 0.4rem;
+        border: none;
+        margin-left: 1rem;
+        margin-bottom: 0.5rem;
+        cursor: pointer;
     }
 
     &__right {
         margin-right: 1rem;
+        display: flex;
+        flex-direction: column;
     }
+}
+
+@media(max-width:720px) {
+    .videoMetaData__stats {
+        font-size: 15px;
+    }
+
+    .videoMetaData__middle {
+        font-size: 15px;
+    }
+
 }
