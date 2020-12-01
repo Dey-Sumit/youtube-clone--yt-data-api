@@ -1,7 +1,17 @@
+.watchScreen__player {
+    height: 60vh;
+    background-color: #353946;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+
 .commentInput {
     margin: 1rem 0;
     display: flex;
     width: 100%;
+
+
 
     img {
         background-color: azure;
@@ -11,7 +21,7 @@
 
     form {
         display: flex;
-
+        flex: 1;
     }
 
     input {
@@ -42,7 +52,7 @@
 }
 
 @media(max-width:720px) {
-    iframe {
-        height: 350px;
+    .watchScreen__player {
+        height: 40vh;
     }
 }

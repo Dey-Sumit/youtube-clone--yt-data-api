@@ -6,10 +6,12 @@ import numeral from 'numeral'
 import moment from 'moment'
 import request from '../../api'
 
-const Video = ({ video, showStats = false, showChannel = true }) => {
-    const { id, contentDetails: { duration, videoId }, snippet: { channelId, channelTitle, description, title, publishedAt,
-        thumbnails: { high, standard, medium } }, statistics } = video
-    // console.log(videoId);
+const Video = ({ video, showChannel = true }) => {
+    const history = useHistory()
+
+    const { id, contentDetails: { duration, videoId }, snippet: { channelId, channelTitle, title, publishedAt,
+        thumbnails: { medium } }, statistics } = video
+
     const _videoId = videoId || id
 
     const seconds = moment.duration(duration).asSeconds();
@@ -32,14 +34,12 @@ const Video = ({ video, showStats = false, showChannel = true }) => {
             get_channel_thumbnail()
     }, [showChannel, channelId])
 
-    //TODO FIX id contains videoId,channelID,playlistId
-    const history = useHistory()
 
     const handleVideoClick = () => {
         history.push(`/watch/${_videoId}`)
     }
 
-    //TODO
+
     const handleChannelClick = (e) => {
         e.stopPropagation();
         history.push(`/channel/${channelId}`)
@@ -56,7 +56,7 @@ const Video = ({ video, showStats = false, showChannel = true }) => {
 
             <p className="video__title">{title}</p>
             <div className="video__metadata">
-                {statistics && <span><AiFillEye /> {numeral(statistics.viewCount).format('0.a')} •  </span>}
+                {statistics && <span><AiFillEye /> {numeral(statistics.viewCount).format('0.a')} Views •  </span>}
                 <span>{moment(publishedAt).fromNow()}</span>
             </div>
             {

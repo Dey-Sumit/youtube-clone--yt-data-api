@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getChannelDetails } from '../../redux/actions/channel.action'
 import { rateVideo } from '../../redux/actions/videos.action';
 import { checkSubscriptionStatus } from '../../redux/actions/channel.action';
+import request from '../../api';
 
 const VideoMetaData = ({ video: { snippet, statistics }, videoId }) => {
     // console.log(snippet);
@@ -18,7 +19,8 @@ const VideoMetaData = ({ video: { snippet, statistics }, videoId }) => {
     const { commentCount, dislikeCount, likeCount, viewCount } = statistics
 
     const dispatch = useDispatch()
-    const { channel: { snippet: channelSnippet, statistics: channelStatistics }, loading, success, subscriptionStatus } = useSelector(state => state.channelDetails)
+    const { channel: { snippet: channelSnippet, statistics: channelStatistics }, loading, subscriptionStatus } = useSelector(state => state.channelDetails)
+
     useEffect(() => {
         dispatch(getChannelDetails(channelId))
 
@@ -28,7 +30,7 @@ const VideoMetaData = ({ video: { snippet, statistics }, videoId }) => {
         dispatch(checkSubscriptionStatus(channelId))
     }, [channelId, dispatch])
 
-    const handleLikeVideo = () => {
+    const handleLikeVideo = async () => {
         dispatch(rateVideo(videoId, "like"))
     }
 
@@ -47,8 +49,8 @@ const VideoMetaData = ({ video: { snippet, statistics }, videoId }) => {
                          • <span>{moment(publishedAt).fromNow()}</span>
                     </div>
                     <div className="videoMetaData__right">
-                        <span className="mr-3"><MdThumbUp size={28} onClick={handleLikeVideo} />{' '} {numeral(likeCount).format('0.a')}</span>
-                        <span className="mr-3"><MdThumbDown size={28} onClick={handleDislikeVideo} />{' '} {numeral(dislikeCount).format('0.a')}</span>
+                        <span className="mr-3"><MdThumbUp size={26} onClick={handleLikeVideo} />{' '} {numeral(likeCount).format('0.a')}</span>
+                        <span className="mr-3"><MdThumbDown size={26} onClick={handleDislikeVideo} />{' '} {numeral(dislikeCount).format('0.a')}</span>
                     </div>
                 </div>
             </div>
@@ -59,8 +61,8 @@ const VideoMetaData = ({ video: { snippet, statistics }, videoId }) => {
                         <span>{channelTitle}</span>
                     </div>
                     <div className="videoMetaData__channel__right">
-                        <button>{subscriptionStatus ? "Subscribed" : "Subscribe"}</button>
-                        <span>{numeral(channelStatistics?.subscriberCount).format('0.0a')} Subscribers</span>
+                        <button className={subscriptionStatus ? 'button-gray' : null}>{subscriptionStatus ? "Subscribed" : "Subscribe"}</button>
+                        <span>{numeral(channelStatistics?.subscriberCount).format('0.a')} Subscribers</span>
                     </div>
                 </div>
                 <div className="videoMetaData__description">

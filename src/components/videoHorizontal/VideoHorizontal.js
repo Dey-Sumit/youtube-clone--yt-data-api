@@ -1,57 +1,40 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import { AiFillEye } from 'react-icons/ai'
-import { useDispatch, useSelector } from 'react-redux'
+// import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import moment from 'moment'
 import numeral from 'numeral'
 
 
-import { getChannelDetails } from '../../redux/actions/channel.action'
+// import { getChannelDetails } from '../../redux/actions/channel.action'
 import './videoHorizontal.scss'
 import request from '../../api'
 
-
-const VideoHorizontal = ({ video, showChannel = true, showDescription = true }) => {
-
+//rename to card
+const VideoHorizontal = ({ video, showChannel = true, showDescription = true, channelScreen }) => {
     const { id, snippet: { channelId, channelTitle, description, title, publishedAt, thumbnails: { medium } } } = video
 
     //TODO FIX id contains videoId,channelID,playlistId
 
-    const thumbnail = id.kind === "youtube#channel" ? 'videoHorizon__thumbnail-channel'
-        : id.kind === "youtube#video" ? 'videoHorizon__thumbnail-video' : 'videoHorizon__thumbnail-playlist'
+    const thumbnail = (id.kind === "youtube#channel" || channelScreen) ? 'videoHorizon__thumbnail-channel' : 'videoHorizon__thumbnail-video';
 
     const history = useHistory()
 
-    // const handleVideoClick = () => {
-    //     // history.push(`/watch/${videoId}`)
-    // }
-    const dispatch = useDispatch()
-
-    const { channel: { snippet: channelSnippet, }, loading, success } = useSelector(state => state.channelDetails)
     const [channelIcon, setChannelIcon] = useState(null)
 
     const [duration, setDuration] = useState(null)
     const [views, setViews] = useState(null)
 
-    useEffect(() => {
-        dispatch(getChannelDetails(channelId))
-    }, [channelId, dispatch])
-
-
     const handleClick = () => {
-        if (id.kind === "youtube#channel") {
+        if (id.kind === "youtube#channel" || channelScreen)
             history.push(`/channel/${id.channelId}`)
-        }
-        // for video
-        //TODO handle playlist later
-        else {
+        else
             history.push(`/watch/${id.videoId}`)
-        }
     }
 
     useEffect(() => {
-        // get the channel thumbnail
+
         const get_channel_thumbnail = async () => {
 
             const { data: { items } } = await request('/channels', {
@@ -77,9 +60,15 @@ const VideoHorizontal = ({ video, showChannel = true, showDescription = true }) 
             setViews(items[0].statistics.viewCount)
             setDuration(items[0].contentDetails.duration)
         }
-        get_video_details()
+        if (!channelScreen) {
+            get_video_details()
+        }
     }, [id])
 
+    // TODO get the channel details eg subscribers
+    // useEffect(() => {
+
+    // },[])
 
     const seconds = moment.duration(duration).asSeconds();
     const _duration = moment.utc(seconds * 1000).format("mm:ss")
@@ -96,17 +85,20 @@ const VideoHorizontal = ({ video, showChannel = true, showDescription = true }) 
             <Col xs={6} md={showDescription ? 8 : 6} className="videoHorizon__right">
 
                 <p className="videoHorizon__title">{title}</p>
-                <div className="videoHorizon__metadata">
-                    {views && <span><AiFillEye /> {numeral(views).format('0.a')} •  </span>}
-                    <span>{moment(publishedAt).fromNow()}</span>
-                </div>
-                {id.kind !== "youtube#channel" &&
+                {!channelScreen &&
+                    <div className="videoHorizon__metadata">
+                        {views && <span><AiFillEye /> {numeral(views).format('0.a')} views • </span>}
+                        <span>{moment(publishedAt).fromNow()}</span>
+                    </div>
+                }
+                {(id.kind !== "youtube#channel" && !channelScreen) &&
                     <div className="videoHorizon__channel">
                         <img src={channelIcon && channelIcon.url} alt="" className="videoHorizon__channel-icon" />
                         <p className="videoHorizon__channel-name">{channelTitle}</p>
                     </div>
                 }
                 {showDescription && <p className="videoHorizon__desc">{description} </p>}
+                {channelScreen && <p className="mt-2">{video.contentDetails.totalItemCount} videos</p>}
             </Col>
 
         </Row >

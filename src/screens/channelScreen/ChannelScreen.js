@@ -8,6 +8,7 @@ import { getAllVideosOfChannel, getChannelDetails } from '../../redux/actions/ch
 import numeral from 'numeral'
 
 import './channelScreen.scss'
+import SkeletonCard from '../../components/skeleton/SkeletonCard'
 
 const ChannelScreen = () => {
 
@@ -20,15 +21,19 @@ const ChannelScreen = () => {
         dispatch(getAllVideosOfChannel(channelId))
     }, [dispatch, channelId])
 
-    const { channel: { snippet, statistics }, videos } = useSelector(state => state.channelDetails)
 
+
+    const { snippet, statistics } = useSelector(state => state.channelDetails.channel)
+    const { videos, loading } = useSelector(state => state.channelVideos)
+
+    //TODO change to helmet
     useEffect(() => {
         document.title = snippet?.title
     }, [snippet])
 
 
     // const history = useHistory()
-    const [page, setPage] = useState(1)
+    // const [page, setPage] = useState(1)
 
     return (
         <>
@@ -46,38 +51,19 @@ const ChannelScreen = () => {
                 </div>
             </div>
 
-            <Container className="main">
+            <Container>
+                <Row className="mt-2">
+                    {
+                        !loading ? videos.map(video =>
+                            <Col md={4} lg={3} key={video.etag} >
+                                <Video video={video} showChannel={false} />
+                            </Col>
+                        ) :
+                            <SkeletonCard width="260px" height="230px" style={{ margin: '0.5rem' }} count={15} />
 
-                {
-                    videos?.length > 0 &&
-                    <InfiniteScroll
-                        dataLength={videos.length}
-                        next={() => setPage(page => page + 1)}
-                        hasMore={true}
-                        loader={<h4>Loading...</h4>}
-                        endMessage={
-                            <p style={{ textAlign: 'center' }}>
-                                <b>Yay! You have seen it all</b>
-                            </p>
-                        }
-                    >
-                        <Container>
-                            <Row className="mt-4">
-                                {
-                                    videos.map(video =>
-                                        <Col md={4} lg={3}>
-                                            <Video key={video.etag} video={video} showChannel={false} />
-                                        </Col>
-                                    )
-                                }
-                            </Row>
-                        </Container>
-                    </InfiniteScroll>
-                }
-
+                    }
+                </Row>
             </Container>
-
-
         </>
     )
 }

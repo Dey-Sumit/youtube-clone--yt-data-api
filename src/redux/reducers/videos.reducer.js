@@ -1,4 +1,4 @@
-import { SET_VIDEOS_ERRORS, SET_POPULAR_VIDEOS, SET_RELATED_VIDEOS, SET_VIDEOS, SET_VIDEO, SET_SUBSCRIPTIONS_VIDEOS, LIKED_VIDEOS_SUCCESS, LIKED_VIDEOS_REQUEST, LIKED_VIDEOS_FAILED } from "../types"
+import { SET_VIDEOS_ERRORS, SET_POPULAR_VIDEOS, SEARCHED_VIDEOS_REQUEST, SEARCHED_VIDEOS_SUCCESS, SEARCHED_VIDEOS_FAILED, SET_RELATED_VIDEOS, SET_VIDEOS, SET_VIDEO, SET_SUBSCRIPTIONS_VIDEOS, LIKED_VIDEOS_SUCCESS, LIKED_VIDEOS_REQUEST, LIKED_VIDEOS_FAILED, SUBSCRIPTIONS_VIDEOS_REQUEST, SUBSCRIPTIONS_VIDEOS_SUCCESS, SUBSCRIPTIONS_VIDEOS_FAILED } from "../types"
 
 const initialState = {
     videos: [],
@@ -61,15 +61,14 @@ export const videosReducer = (state = initialState, action) => {
 }
 
 
-export const likedVideosReducer = (state = { loading: true, videos: [] }, action) => {
+export const likedVideosReducer = (state = { loading: true, videos: null }, action) => {
     const { type, payload } = action
 
     switch (type) {
         case LIKED_VIDEOS_SUCCESS:
-
             return {
                 ...state,
-                videos: payload.videos,
+                videos: payload,
                 loading: false,
                 error: null
             }
@@ -78,10 +77,46 @@ export const likedVideosReducer = (state = { loading: true, videos: [] }, action
             return {
                 ...state,
                 loading: true,
-
             }
 
         case LIKED_VIDEOS_FAILED:
+            return {
+                ...state,
+                loading: false,
+                error: payload
+            }
+
+
+        default:
+            return state
+    }
+}
+
+export const rateVideosReducer = (state = {}, action) => {
+
+}
+
+export const searchedVideosReducer = (state = { loading: true, videos: [] }, action) => {
+    const { type, payload } = action
+
+    switch (type) {
+
+        case SEARCHED_VIDEOS_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+
+        case SEARCHED_VIDEOS_SUCCESS:
+            return {
+                ...state,
+                videos: payload,
+                loading: false,
+                error: null
+            }
+
+
+        case SEARCHED_VIDEOS_FAILED:
             return {
                 ...state,
                 loading: false,
@@ -94,7 +129,36 @@ export const likedVideosReducer = (state = { loading: true, videos: [] }, action
             return state
     }
 }
+export const subscriptionsVideosReducer = (state = { loading: true, videos: [] }, action) => {
+    const { type, payload } = action
 
-export const rateVideosReducer = (state = {}, action) => {
+    switch (type) {
 
+        case SUBSCRIPTIONS_VIDEOS_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+
+        case SUBSCRIPTIONS_VIDEOS_SUCCESS:
+            return {
+                ...state,
+                videos: payload,
+                loading: false,
+                error: null
+            }
+
+
+        case SUBSCRIPTIONS_VIDEOS_FAILED:
+            return {
+                ...state,
+                loading: false,
+                error: payload
+
+            }
+
+
+        default:
+            return state
+    }
 }

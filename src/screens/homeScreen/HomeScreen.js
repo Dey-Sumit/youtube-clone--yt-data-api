@@ -9,6 +9,7 @@ import Video from '../../components/video/Video'
 
 import { fetchPopularVideos } from '../../redux/actions/videos.action'
 import './homeScreen.scss'
+import SkeletonCard from '../../components/skeleton/SkeletonCard'
 
 
 const HomeScreen = () => {
@@ -38,31 +39,32 @@ const HomeScreen = () => {
 
         <Container className="main">
             {
-                videos?.length > 0 &&
-                (<InfiniteScroll
-                    dataLength={videos.length}
-                    next={() => setPage(page => page + 1)}
-                    hasMore={true}
-                    loader={<div class="spinner-border text-danger d-block mx-auto" />}
-                    endMessage={
-                        <p style={{ textAlign: 'center' }}>
-                            <b>Yay! You have seen it all</b>
-                        </p>
-                    }
-                >
-                    <Container>
-                        <Row className="mt-4">
-                            {
-                                videos.map(video =>
-                                    <Col md={4} lg={3} key={video.etag} >
-                                        <Video video={video} />
-                                    </Col>
-                                )
-                            }
-                        </Row>
-                    </Container>
-                </InfiniteScroll>
-                )
+                videos?.length > 0 ?
+                    (<InfiniteScroll
+                        dataLength={videos.length}
+                        next={() => setPage(page => page + 1)}
+                        hasMore={true}
+                        loader={<div className="spinner-border text-danger d-block mx-auto" />}
+                        endMessage={
+                            <p style={{ textAlign: 'center' }}>
+                                <b>Yay! You have seen it all</b>
+                            </p>
+                        }
+                    >
+                        <Container>
+                            <Row className="mt-4">
+                                {
+                                    videos.map(video =>
+                                        <Col md={4} lg={3} key={video.etag} >
+                                            <Video video={video} />
+                                        </Col>
+                                    )
+                                }
+                            </Row>
+                        </Container>
+                    </InfiniteScroll>
+                    ) :
+                    <SkeletonCard width="250px" height="230px" count={15} style={{ margin: '0.5rem' }} />
             }
 
         </Container>

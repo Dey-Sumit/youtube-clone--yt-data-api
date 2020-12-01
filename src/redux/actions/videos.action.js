@@ -1,5 +1,5 @@
 import request from '../../api';
-import { SET_VIDEOS_ERRORS, SET_RELATED_VIDEOS, SET_VIDEOS, SET_VIDEO, SET_SUBSCRIPTIONS_VIDEOS, LIKED_VIDEOS_SUCCESS, LIKED_VIDEOS_FAILED, LIKED_VIDEOS_REQUEST } from '../types'
+import { SET_VIDEOS_ERRORS, SET_RELATED_VIDEOS, SET_VIDEOS, SET_VIDEO, RATE_VIDEO_SUCCESS, RATE_VIDEO_FAIL, LIKED_VIDEOS_SUCCESS, LIKED_VIDEOS_FAILED, LIKED_VIDEOS_REQUEST, SEARCHED_VIDEOS_SUCCESS, SEARCHED_VIDEOS_FAILED, SEARCHED_VIDEOS_REQUEST, SUBSCRIPTIONS_VIDEOS_REQUEST, SUBSCRIPTIONS_VIDEOS_SUCCESS, SUBSCRIPTIONS_VIDEOS_FAILED } from '../types'
 
 export const getRelatedVideos = (videoId) => async dispatch => {
 
@@ -27,30 +27,31 @@ export const getRelatedVideos = (videoId) => async dispatch => {
 }
 // make separate reducers
 
-export const searchVideos = (q, type = 'channel,video') => async (dispatch, getState) => {
+export const searchVideos = (q) => async (dispatch) => {
     try {
+        dispatch({
+            type: SEARCHED_VIDEOS_REQUEST
+        })
+
+
         const { data } = await request('/search', {
             params: {
                 part: 'snippet',
                 q,
-                type: type,
-                pageToken: getState().videos.nextPageToken
+                type: 'channel,video',
+                maxResults: 15
             }
         })
 
         dispatch({
-            type: SET_VIDEOS,
-            payload: {
-                videos: data.items,
-                nextPageToken: data.nextPageToken
-            }
+            type: SEARCHED_VIDEOS_SUCCESS,
+            payload: data.items
         })
-        console.log(data);
 
     } catch (error) {
         console.log(error);
         dispatch({
-            type: SET_VIDEOS_ERRORS,
+            type: SEARCHED_VIDEOS_FAILED,
             payload: error.message
         })
     }
@@ -123,32 +124,25 @@ export const getVideoById = (videoId) => async (dispatch, getState) => {
 }
 
 export const getSubscriptionsVideos = () => async (dispatch, getState) => {
-    console.log("request video of subs");
 
-    // if(getState.videos.nextPageToken!==null){
-
-    // }
+    dispatch({
+        type: SUBSCRIPTIONS_VIDEOS_REQUEST
+    })
 
     try {
         const { data } = await request('/subscriptions', {
             params: {
                 mine: true,
                 part: 'contentDetails,snippet,subscriberSnippet',
-                maxResults: 10,
-                pageToken: getState().videos.nextPageToken
+                maxResults: 15,
             },
-            headers: { 'Authorization': `Bearer ${getState().auth.accessToken}` }
 
         })
-        const { items, nextPageToken } = data
         // console.log(items, nextPageToken);
 
         dispatch({
-            type: SET_SUBSCRIPTIONS_VIDEOS,
-            payload: {
-                videos: items,
-                nextPageToken: nextPageToken
-            }
+            type: SUBSCRIPTIONS_VIDEOS_SUCCESS,
+            payload: data.items
         })
 
 
@@ -156,7 +150,7 @@ export const getSubscriptionsVideos = () => async (dispatch, getState) => {
         console.log(error);
         console.log(error.message);
         dispatch({
-            type: SET_VIDEOS_ERRORS,
+            type: SUBSCRIPTIONS_VIDEOS_FAILED,
             payload: error.message
         })
     }
@@ -164,11 +158,6 @@ export const getSubscriptionsVideos = () => async (dispatch, getState) => {
 }
 
 export const getLikedVideos = () => async (dispatch, getState) => {
-    console.log("request video of liked ");
-
-    // if(getState.videos.nextPageToken!==null){
-
-    // }
     dispatch({
         type: LIKED_VIDEOS_REQUEST
     })
@@ -178,21 +167,16 @@ export const getLikedVideos = () => async (dispatch, getState) => {
             params: {
                 myRating: 'like',
                 part: 'contentDetails,snippet,statistics',
-                maxResults: 10,
-                pageToken: getState().videos.nextPageToken
+                maxResults: 15,
             },
-            headers: { 'Authorization': `Bearer ${getState().auth.accessToken}` }
 
         })
-        const { items, nextPageToken } = data
+        const { items } = data
         // console.log(items, nextPageToken);
 
         dispatch({
             type: LIKED_VIDEOS_SUCCESS,
-            payload: {
-                videos: items,
-                nextPageToken: nextPageToken
-            }
+            payload: items
         })
 
 
@@ -207,45 +191,23 @@ export const getLikedVideos = () => async (dispatch, getState) => {
 
 }
 
-//TODO ?FIX this
 
-export const rateVideo = (id, type) => async (dispatch, getState) => {
-    console.log("request rate a video ");
 
-    // if(getState.videos.nextPageToken!==null){
-
-    // }
-    // dispatch({
-    //     type: LIKED_VIDEOS_REQUEST
-    // })
-
+export const rateVideo = (id, type) => async (dispatch) => {
     try {
-        const res = await request('/videos/rate', {
+        await request.post('/videos/rate', null, {
             params: {
                 id: id,
                 rating: type
             },
-            headers: { 'Authorization': `Bearer ${getState().auth.accessToken}` }
-
         })
-        console.log(res);
-        console.log("success");
-        // console.log(items, nextPageToken);
-
-        // dispatch({
-        //     type: LIKED_VIDEOS_SUCCESS,
-        //     payload: {
-        //         videos: items,
-        //         nextPageToken: nextPageToken
-        //     }
-        // })
-
-
+        dispatch({
+            type: RATE_VIDEO_SUCCESS,
+        })
     } catch (error) {
-        console.log(error);
         console.log(error.message);
         dispatch({
-            type: LIKED_VIDEOS_FAILED,
+            type: RATE_VIDEO_FAIL,
             payload: error.message
         })
     }

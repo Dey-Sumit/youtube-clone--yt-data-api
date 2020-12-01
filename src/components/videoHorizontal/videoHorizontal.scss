@@ -17,11 +17,14 @@
         border-radius: 5px;
         width: 100%;
 
+
         &-video {}
 
         &-channel {
             border-radius: 50%;
-            width: 60%;
+            width: 50%;
+            margin: 0 auto;
+            display: block;
         }
     }
 

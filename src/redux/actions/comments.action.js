@@ -2,7 +2,6 @@ import request from "../../api";
 import { CREATE_COMMENT_FAILED, CREATE_COMMENT_REQUEST, CREATE_COMMENT_SUCCESS, SET_COMMENTS, SET_COMMENTS_ERRORS } from "../types";
 
 export const getCommentsOfVideoById = (videoId) => async dispatch => {
-    console.log("request getCommentsOfVideoById");
     try {
         const { data } = await request('/commentThreads', {
             params: {
@@ -10,9 +9,6 @@ export const getCommentsOfVideoById = (videoId) => async dispatch => {
                 videoId: videoId
             }
         })
-
-        // const comments = data.items.videos.map(video => video.snippet)
-        // const comments = data.items.videos.map(video => video.snippet)
         dispatch({
             type: SET_COMMENTS,
             payload: data.items
@@ -54,7 +50,10 @@ export const addComment = (id, text) => async (dispatch, getState) => {
         })
 
         //TODO loadComments()
-        dispatch(getCommentsOfVideoById(id))
+        setTimeout(() => {
+            dispatch(getCommentsOfVideoById(id))
+
+        }, 2000)
     } catch (error) {
         console.log(error);
         dispatch({

@@ -2,7 +2,7 @@ import { LOGIN_SUCCESS, LOGOUT, SET_PROFILE, } from "../types"
 
 const initialState = {
     accessToken: localStorage.getItem("yt-access-token") ? localStorage.getItem("yt-access-token") : null,
-    user: localStorage.getItem("yt-user") ? localStorage.getItem("yt-user") : null
+    user: localStorage.getItem("yt-user") ? JSON.parse(localStorage.getItem("yt-user")) : null
 }
 
 export const authReducer = (state = initialState, action) => {
@@ -17,13 +17,15 @@ export const authReducer = (state = initialState, action) => {
                 accessToken: payload
             }
         case SET_PROFILE:
-            localStorage.setItem("yt-user", payload)
+            localStorage.setItem("yt-user", JSON.stringify(payload))
             return {
                 ...state,
                 user: payload
             }
 
         case LOGOUT:
+            localStorage.removeItem("yt-access-token")
+            localStorage.removeItem("yt-user")
             return {
                 ...state,
                 // shift this to access creator

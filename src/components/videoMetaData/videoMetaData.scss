@@ -34,7 +34,15 @@
     font-weight: 400;
 }
 
-.videoMetaData__right {}
+.videoMetaData__right {
+    span {
+        cursor: pointer;
+
+        &.active {
+            color: blue
+        }
+    }
+}
 
 .videoMetaData__channel {
     letter-spacing: 0.3px;
@@ -63,12 +71,18 @@
         margin-left: 1rem;
         margin-bottom: 0.5rem;
         cursor: pointer;
+
+        &.button-gray {
+            background-color: rgb(66, 65, 65);
+        }
     }
 
     &__right {
         margin-right: 1rem;
         display: flex;
         flex-direction: column;
+
+
     }
 }
 
