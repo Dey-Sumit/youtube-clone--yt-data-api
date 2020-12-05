@@ -81,7 +81,7 @@ export const getAllVideosOfChannel = (id) => async dispatch => {
             params: {
                 part: 'snippet,contentDetails',
                 playlistId: uploadsPlaylistId,
-                maxResults: 15,
+                maxResults: 30,
             }
         })
         dispatch({

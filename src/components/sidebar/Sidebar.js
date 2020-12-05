@@ -1,7 +1,7 @@
 import React from 'react'
 import { FiHome } from 'react-icons/fi'
 import { AiOutlineFire } from 'react-icons/ai'
-import { MdSubscriptions, MdExitToApp, MdThumbUp } from 'react-icons/md'
+import { MdSubscriptions, MdExitToApp, MdThumbUp, MdHistory, MdLibraryBooks } from 'react-icons/md'
 import SidebarItem from '../sidebarItem/SidebarItem'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
@@ -23,10 +23,6 @@ const Sidebar = ({ showSidebar }) => {
                 <SidebarItem Icon={FiHome} text="Home" />
             </Link>
 
-            {/* <Link to="/feed/subscriptions">
-                <SidebarItem Icon={AiOutlineFire} text="Explore" />
-            </Link> */}
-
             <Link to="/feed/subscriptions">
                 <SidebarItem Icon={MdSubscriptions} text="Subscription" />
             </Link>
@@ -34,6 +30,13 @@ const Sidebar = ({ showSidebar }) => {
             <Link to="/feed/likedVideos">
                 <SidebarItem Icon={MdThumbUp} text="Liked Videos" />
             </Link>
+
+            <SidebarItem Icon={AiOutlineFire} text="Explore" />
+
+            <SidebarItem Icon={MdHistory} text="History" />
+
+            <SidebarItem Icon={MdLibraryBooks} text="Library" />
+
 
             <hr />
 

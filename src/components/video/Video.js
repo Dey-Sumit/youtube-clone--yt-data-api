@@ -9,10 +9,16 @@ import request from '../../api'
 const Video = ({ video, showChannel = true }) => {
     const history = useHistory()
 
-    const { id, contentDetails: { duration, videoId }, snippet: { channelId, channelTitle, title, publishedAt,
-        thumbnails: { medium } }, statistics } = video
+    const [duration, setDuration] = useState(null)
+    const [views, setViews] = useState(null)
 
-    const _videoId = videoId || id
+    const { id, snippet: { channelId, channelTitle, title, publishedAt,
+        thumbnails: { medium } } } = video
+
+    // const duration = video?.contentDetails?.duration
+    // const videoId = video?.contentDetails?.videoId
+
+    const _videoId = id?.videoId || id
 
     const seconds = moment.duration(duration).asSeconds();
     const _duration = moment.utc(seconds * 1000).format("mm:ss")
@@ -34,6 +40,21 @@ const Video = ({ video, showChannel = true }) => {
             get_channel_thumbnail()
     }, [showChannel, channelId])
 
+    useEffect(() => {
+        const get_video_details = async () => {
+            const { data: { items } } = await request('/videos', {
+                params: {
+                    part: 'contentDetails,statistics',
+                    id: _videoId
+                }
+            })
+            setViews(items[0].statistics.viewCount)
+            setDuration(items[0].contentDetails.duration)
+        }
+
+        get_video_details(_videoId)
+
+    }, [_videoId])
 
     const handleVideoClick = () => {
         history.push(`/watch/${_videoId}`)
@@ -56,7 +77,7 @@ const Video = ({ video, showChannel = true }) => {
 
             <p className="video__title">{title}</p>
             <div className="video__metadata">
-                {statistics && <span><AiFillEye /> {numeral(statistics.viewCount).format('0.a')} Views •  </span>}
+                {views && <span><AiFillEye /> {numeral(views).format('0.a')} Views •  </span>}
                 <span>{moment(publishedAt).fromNow()}</span>
             </div>
             {

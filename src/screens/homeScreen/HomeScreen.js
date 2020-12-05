@@ -1,26 +1,42 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
-import { Col, Container, Row } from 'react-bootstrap'
+import { Col, Container } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 import Video from '../../components/video/Video'
 
-import { fetchPopularVideos } from '../../redux/actions/videos.action'
+import { fetchCategoriesVideos, fetchHomeVideos } from '../../redux/actions/videos.action'
 import './homeScreen.scss'
-import SkeletonCard from '../../components/skeleton/SkeletonCard'
 
+// import SkeletonCard from '../../components/skeleton/SkeletonCard'
+import SkeletonVideo from '../../components/skeleton/SkeletonVideo'
+import CategoriesBar from '../../components/categoriesBar/CategoriesBar'
+import { SET_ACTIVE_CATEGORY } from '../../redux/types'
 
 const HomeScreen = () => {
 
     const dispatch = useDispatch()
 
     const { accessToken } = useSelector(state => state.auth)
-    const videos = useSelector(state => state.videos.videos)
+    const { videos, activeCategory } = useSelector(state => state.homeVideos)
 
     const history = useHistory()
-    const [page, setPage] = useState(1)
+    // const [page, setPage] = useState(1)
+
+    const nextCall = () => {
+        if (activeCategory === 'All') {
+            dispatch(fetchHomeVideos())
+        }
+        else {
+            dispatch({
+                type: SET_ACTIVE_CATEGORY,
+                payload: activeCategory
+            })
+            dispatch(fetchCategoriesVideos(activeCategory))
+        }
+    }
 
     useEffect(() => {
 
@@ -30,42 +46,49 @@ const HomeScreen = () => {
             history.push('/auth')
         }
         else {
-            dispatch(fetchPopularVideos())
+            dispatch(fetchHomeVideos())
         }
 
-    }, [history, page, dispatch, accessToken])
+    }, [history, dispatch, accessToken])
 
     return (
 
         <Container className="main">
-            {
-                videos?.length > 0 ?
-                    (<InfiniteScroll
-                        dataLength={videos.length}
-                        next={() => setPage(page => page + 1)}
-                        hasMore={true}
-                        loader={<div className="spinner-border text-danger d-block mx-auto" />}
-                        endMessage={
-                            <p style={{ textAlign: 'center' }}>
-                                <b>Yay! You have seen it all</b>
-                            </p>
-                        }
-                    >
-                        <Container>
-                            <Row className="mt-4">
-                                {
-                                    videos.map(video =>
-                                        <Col md={4} lg={3} key={video.etag} >
-                                            <Video video={video} />
-                                        </Col>
-                                    )
-                                }
-                            </Row>
-                        </Container>
-                    </InfiniteScroll>
-                    ) :
-                    <SkeletonCard width="250px" height="230px" count={15} style={{ margin: '0.5rem' }} />
-            }
+            <CategoriesBar />
+            <InfiniteScroll
+                dataLength={videos.length}
+                // next={() => setPage(page => page + 1)}
+                next={() => nextCall()}
+                hasMore={true}
+                className="row"
+                loader={< div className="spinner-border text-danger d-block mx-auto" />}
+                endMessage={
+                    <p style={{ textAlign: 'center' }}>
+                        <b>Yay! You have seen it all</b>
+                    </p>
+                }
+            >
+
+
+                {
+                    videos.length > 0 ? videos.map(video =>
+                        <Col md={4} lg={3} key={video?.id?.videoId || video?.id} >
+                            <Video video={video} />
+                        </Col>
+                    )
+                        :
+
+                        [...Array(16)].map((_, i) =>
+                            <Col md={4} lg={3} key={i} >
+                                <SkeletonVideo />
+                            </Col>
+                        )
+
+
+                }
+
+            </InfiniteScroll>
+
 
         </Container>
 

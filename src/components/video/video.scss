@@ -11,6 +11,10 @@
     font-weight: 500;
     cursor: pointer;
 
+    &__metadata {
+        font-size: 0.9rem;
+    }
+
     &__thumbnail {
         position: relative;
         margin-bottom: 0.5rem;

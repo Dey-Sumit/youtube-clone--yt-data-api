@@ -16,16 +16,16 @@ const WatchScreen = () => {
 
     const { id } = useParams()
     const dispatch = useDispatch()
-    const relatedVideos = useSelector(state => state.videos.relatedVideos)
-    const video = useSelector(state => state.videos.video)
-    // const loading = useSelector(state => state.videos.loading)
+    const { videos, loading } = useSelector(state => state.relatedVideos)
+    const { video, loading: videoLoading } = useSelector(state => state.selectedVideo)
+
     const comments = useSelector(state => state.comments.comments)
     const [input, setInput] = useState('')
 
     const { loading: commentCreatedLoading, success: commentCreatedSuccess } = useSelector(state => state.createComment)
 
     useEffect(() => {
-        // dispatch(getRelatedVideos(id))
+        dispatch(getRelatedVideos(id))
         dispatch(getCommentsOfVideoById(id))
         dispatch(getVideoById(id))
     }, [dispatch, id])
@@ -69,7 +69,7 @@ const WatchScreen = () => {
                     />
                 </div>
 
-                {video ? <VideoMetaData video={video} videoId={id} /> :
+                {!videoLoading ? <VideoMetaData video={video} videoId={id} /> :
                     <SkeletonCard width="100%" height="200px" count={1} />
                 }
 
@@ -91,8 +91,8 @@ const WatchScreen = () => {
             </Col>
             <Col lg={4}>
                 <h5 className="my-3">Up Next</h5>
-                {relatedVideos?.length > 0 ?
-                    relatedVideos.map(video =>
+                {!loading ?
+                    videos.map(video =>
                         <VideoHorizontal video={video} key={video.etag} showDescription={false} />
                     ) :
                     <SkeletonCard width="100%" height="130px" count={15} />

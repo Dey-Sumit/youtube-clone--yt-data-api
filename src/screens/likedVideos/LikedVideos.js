@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import Sidebar from '../../components/sidebar/Sidebar'
+import React, { useEffect } from 'react'
 // import './homeScreen.scss'
 
 import { Col, Container, Row } from 'react-bootstrap'
@@ -7,8 +6,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { getLikedVideos } from '../../redux/actions/videos.action'
 import Video from '../../components/video/Video'
-import InfiniteScroll from 'react-infinite-scroll-component'
 import SkeletonCard from '../../components/skeleton/SkeletonCard'
+
 const LikedVideosScreen = () => {
 
     const dispatch = useDispatch()
@@ -17,7 +16,6 @@ const LikedVideosScreen = () => {
     const { videos, loading } = useSelector(state => state.likedVideos)
 
     const history = useHistory()
-    const [page, setPage] = useState(1)
 
     useEffect(() => {
 
@@ -28,7 +26,7 @@ const LikedVideosScreen = () => {
         else {
             dispatch(getLikedVideos())
         }
-    }, [history, page, dispatch, accessToken])
+    }, [history, dispatch, accessToken])
 
     return (
         <Container>
@@ -40,7 +38,7 @@ const LikedVideosScreen = () => {
                         </Col>
                     )
                         :
-                        [...Array(10)].map(
+                        [...Array(16)].map(
                             (d, i) => <Col md={4} lg={3} key={i}>
                                 <SkeletonCard width="100%" height="230px" />
                             </Col>

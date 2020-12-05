@@ -12,12 +12,14 @@ import { getChannelDetails } from '../../redux/actions/channel.action'
 import { rateVideo } from '../../redux/actions/videos.action';
 import { checkSubscriptionStatus } from '../../redux/actions/channel.action';
 import request from '../../api';
+import { useHistory } from 'react-router-dom';
 
 const VideoMetaData = ({ video: { snippet, statistics }, videoId }) => {
     // console.log(snippet);
     const { channelId, channelTitle, description, title, publishedAt } = snippet
     const { commentCount, dislikeCount, likeCount, viewCount } = statistics
 
+    const history = useHistory()
     const dispatch = useDispatch()
     const { channel: { snippet: channelSnippet, statistics: channelStatistics }, loading, subscriptionStatus } = useSelector(state => state.channelDetails)
 
@@ -55,7 +57,7 @@ const VideoMetaData = ({ video: { snippet, statistics }, videoId }) => {
                 </div>
             </div>
             <div className="videoMetaData__middle">
-                <div className="videoMetaData__channel">
+                <div className="videoMetaData__channel" onClick={() => history.push(`/channel/${channelId}`)}>
                     <div className="videoMetaData__channel__left">
                         <img src={channelSnippet?.thumbnails?.default?.url} alt="thumbnail" className="mr-2" />
                         <span>{channelTitle}</span>

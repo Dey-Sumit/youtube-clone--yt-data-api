@@ -30,6 +30,11 @@
     font-size: inherit;
     cursor: pointer;
     transition: all 150ms;
+
+    &:focus {
+        outline: none;
+
+    }
 }
 
 .category-section .fadeRight {
@@ -49,6 +54,8 @@
     background-color: #606060;
     color: #fff;
     border-color: #eee;
+
+
 }
 
 .category:last-child {

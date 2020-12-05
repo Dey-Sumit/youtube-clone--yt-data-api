@@ -3,13 +3,17 @@
 .videoHorizon {
     padding: 2rem;
     cursor: pointer;
-    box-shadow: 5px 5px 10px #090a0b, -5px -5px 10px #23262b;
+    // box-shadow: 5px 5px 10px #090a0b, -5px -5px 10px #23262b;
     // background: #282a31;
 
-    border-radius: 8px;
+    // border-radius: 8px;
     margin: 0.7rem;
     align-items: center;
+    border-bottom: 0.4px solid $borderColor;
 
+    &__metadata {
+        font-size: 0.9rem;
+    }
 
     &__thumbnail {
         background-color: #aaa;

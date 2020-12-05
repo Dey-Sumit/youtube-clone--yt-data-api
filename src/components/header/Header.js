@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import './header.scss'
 
 import { FaSearch, FaBars } from 'react-icons/fa'
+import { MdNotifications, MdApps } from 'react-icons/md'
+import { BsFillCameraVideoFill } from 'react-icons/bs'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
@@ -31,7 +33,10 @@ const Header = ({ toggleShowSidebar }) => {
                     <FaSearch size={22} />
                 </button>
             </form>
-
+            <div className="header__icons">
+                <MdNotifications />
+                <MdApps />
+            </div>
             <div className="header__user-info">
                 {/* only large screen <span className="mr-3">{user.givenName}</span> */}
                 <img src={user?.imageUrl} alt="avatar" className="fluid" />
