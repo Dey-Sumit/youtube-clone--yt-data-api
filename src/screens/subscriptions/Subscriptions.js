@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Container, Row } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import SkeletonCard from '../../components/skeleton/SkeletonCard'
 import VideoHorizontal from '../../components/videoHorizontal/VideoHorizontal'

@@ -11,7 +11,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getChannelDetails } from '../../redux/actions/channel.action'
 import { rateVideo } from '../../redux/actions/videos.action';
 import { checkSubscriptionStatus } from '../../redux/actions/channel.action';
-import request from '../../api';
 import { useHistory } from 'react-router-dom';
 
 const VideoMetaData = ({ video: { snippet, statistics }, videoId }) => {
@@ -21,7 +20,7 @@ const VideoMetaData = ({ video: { snippet, statistics }, videoId }) => {
 
     const history = useHistory()
     const dispatch = useDispatch()
-    const { channel: { snippet: channelSnippet, statistics: channelStatistics }, loading, subscriptionStatus } = useSelector(state => state.channelDetails)
+    const { channel: { snippet: channelSnippet, statistics: channelStatistics }, subscriptionStatus } = useSelector(state => state.channelDetails)
 
     useEffect(() => {
         dispatch(getChannelDetails(channelId))

@@ -22,7 +22,7 @@ const WatchScreen = () => {
     const comments = useSelector(state => state.comments.comments)
     const [input, setInput] = useState('')
 
-    const { loading: commentCreatedLoading, success: commentCreatedSuccess } = useSelector(state => state.createComment)
+    const { loading: commentCreatedLoading } = useSelector(state => state.createComment)
 
     useEffect(() => {
         dispatch(getRelatedVideos(id))

@@ -3,7 +3,6 @@ import './header.scss'
 
 import { FaSearch, FaBars } from 'react-icons/fa'
 import { MdNotifications, MdApps } from 'react-icons/md'
-import { BsFillCameraVideoFill } from 'react-icons/bs'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 

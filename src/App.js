@@ -15,7 +15,6 @@ import Header from './components/header/Header'
 import Subscriptions from './screens/subscriptions/Subscriptions'
 import ChannelScreen from './screens/channelScreen/ChannelScreen'
 import LikedVideosScreen from './screens/likedVideos/LikedVideos'
-import { useWindowWidth } from '@react-hook/window-size'
 
 
 

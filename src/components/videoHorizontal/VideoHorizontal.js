@@ -63,7 +63,7 @@ const VideoHorizontal = ({ video, showChannel = true, showDescription = true, ch
         if (!channelScreen) {
             get_video_details()
         }
-    }, [id])
+    }, [id, channelScreen])
 
     // TODO get the channel details eg subscribers
     // useEffect(() => {
