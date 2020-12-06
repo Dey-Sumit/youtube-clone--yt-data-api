@@ -74,7 +74,7 @@ const WatchScreen = () => {
                 }
 
                 <div className="commentInput">
-                    <img src={user?.imageUrl} alt="avatar" className="fluid mr-4" />
+                    <img src={user?.picture} alt="avatar" className="fluid mr-4" />
                     <form onSubmit={handleComment}>
                         <input type="text" placeholder="write a comment"
                             value={input} onChange={e => setInput(e.target.value)} />

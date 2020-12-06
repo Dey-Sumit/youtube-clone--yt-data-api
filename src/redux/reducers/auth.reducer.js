@@ -17,7 +17,6 @@ export const authReducer = (state = initialState, action) => {
                 accessToken: payload
             }
         case SET_PROFILE:
-            localStorage.setItem("yt-user", JSON.stringify(payload))
             return {
                 ...state,
                 user: payload

@@ -50,8 +50,8 @@ const LoginButton = ({ scope }) => {
             buttonText="Login with Google"
             onSuccess={responseGoogle}
             onFailure={handleError}
-            // accessType="offline"
-            // responseType="code"
+            accessType="offline"
+            responseType="code"
             fetchBasicProfile
             scope={scope}
         />

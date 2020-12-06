@@ -19,4 +19,14 @@
         height: 120px;
         object-fit: contain;
     }
+
+    button {
+        padding: 0.5rem;
+        border: none;
+        border-radius: 5px;
+
+        &:focus {
+            outline: none
+        }
+    }
 }

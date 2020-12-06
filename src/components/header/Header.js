@@ -39,7 +39,7 @@ const Header = ({ toggleShowSidebar }) => {
             </div>
             <div className="header__user-info">
                 {/* only large screen <span className="mr-3">{user.givenName}</span> */}
-                <img src={user?.imageUrl} alt="avatar" className="fluid" />
+                <img src={user?.picture} alt="avatar" className="fluid" />
             </div>
         </div>
 

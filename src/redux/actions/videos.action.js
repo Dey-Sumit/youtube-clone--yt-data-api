@@ -104,8 +104,6 @@ export const fetchCategoriesVideos = (q) => async (dispatch, getState) => {
         dispatch({
             type: HOME_VIDEOS_REQUEST
         })
-
-
         const { data } = await request('/search', {
             params: {
                 part: 'snippet',
@@ -140,7 +138,6 @@ export const fetchCategoriesVideos = (q) => async (dispatch, getState) => {
 
 export const getVideoById = (videoId) => async (dispatch) => {
     try {
-
         dispatch({
             type: SELECTED_VIDEO_REQUEST
         })
