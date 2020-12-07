@@ -1,32 +1,31 @@
-@import '../../base.scss';
+@import "../../base.scss";
 
 .loginScreen {
-    height: 100vh;
-    display: grid;
-    place-items: center;
-
+  height: 100vh;
+  display: grid;
+  place-items: center;
 }
 
 .login {
-    background-color: #282a31;
-    border-radius: 10px;
-    padding: 2rem;
-    margin: 0 1rem;
-    text-align: center;
+  background-color: #282a31;
+  border-radius: 10px;
+  padding: 2rem;
+  margin: 0 1rem;
+  text-align: center;
 
-    img {
-        width: 120px;
-        height: 120px;
-        object-fit: contain;
+  img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+  }
+
+  button {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+
+    &:focus {
+      outline: none;
     }
-
-    button {
-        padding: 0.5rem;
-        border: none;
-        border-radius: 5px;
-
-        &:focus {
-            outline: none
-        }
-    }
+  }
 }

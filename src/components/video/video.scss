@@ -1,65 +1,60 @@
-@import '../../base.scss';
+@import "../../base.scss";
 
 .video {
+  margin-bottom: 1rem;
+  padding: 0.7rem;
 
-    //TODO put in variable
-    background: #282a31;
+  font-weight: 500;
+  font-size: 0.9rem;
 
-    margin-bottom: 1rem;
-    padding: 0.7rem;
-    border-radius: 8px;
-    font-weight: 500;
-    cursor: pointer;
+  cursor: pointer;
 
-    &__metadata {
-        font-size: 0.9rem;
+  &__top {
+    position: relative;
+    margin-bottom: 0.5rem;
+
+    img {
+      width: 100%;
+      //TODO set bg
+    }
+  }
+
+  &__title {
+    margin-bottom: 0.1rem;
+
+    color: #fff;
+    @include line-clamp(1);
+  }
+
+  &__duration {
+    position: absolute;
+    bottom: 0.3rem;
+    right: 0.3rem;
+
+    padding: 0.2rem;
+    background: #080808ec;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 0.9rem;
+  }
+
+  &__channel {
+    display: flex;
+    align-items: center;
+    margin: 0.5rem 0;
+
+    img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+      margin-right: 0.5rem;
+      border-radius: 50%;
+      cursor: pointer;
     }
 
-    &__thumbnail {
-        position: relative;
-        margin-bottom: 0.5rem;
-
-        img {
-            width: 100%;
-        }
+    p {
+      margin-bottom: 0;
+      @include line-clamp(1);
     }
-
-    &__duration {
-        padding: 0.1rem 0.2rem;
-        background: #000000c9;
-        border-radius: 3px;
-        bottom: 0.3rem;
-        right: 0.3rem;
-        font-size: 0.9rem;
-        position: absolute;
-    }
-
-    &__channel {
-        display: flex;
-        align-items: center;
-        margin: 0.5rem 0;
-
-        img {
-            width: 36px;
-            height: 36px;
-            object-fit: contain;
-            margin-right: 0.5rem;
-            background-color: #aaa;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        &__name {
-            @include line-clamp(1);
-        }
-    }
-
-    &__title {
-        font-size: 0.9rem;
-        margin-bottom: 0.1rem;
-        color: #fff;
-        letter-spacing: 0.1px;
-        @include line-clamp(1);
-    }
-
+  }
 }

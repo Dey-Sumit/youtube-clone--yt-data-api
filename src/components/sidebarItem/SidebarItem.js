@@ -1,13 +1,13 @@
-import React from 'react'
-import './sidebarItem.scss'
+import React from "react";
+import "./sidebarItem.scss";
 
 const SidebarItem = ({ Icon, text }) => {
-    return (
-        <div className="sidebar__item">
-            <Icon size={23} />
-            <span className="ml-3 sidebar__item__text">{text}</span>
-        </div>
-    )
-}
+  return (
+    <div className="sidebarItem">
+      <Icon size={23} />
+      <span className="ml-3">{text}</span>
+    </div>
+  );
+};
 
-export default SidebarItem
+export default SidebarItem;

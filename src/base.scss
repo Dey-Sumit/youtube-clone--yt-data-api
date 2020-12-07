@@ -1,46 +1,56 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap");
 
-$primary-color:#b1bde4;
-$light-color:#15161A;
-$background:#16181B;
-$borderColor:#4c4c4c;
-$box-shadow:12;
+$primary-color: #b1bde4;
+$light-color: #15161a;
+$background: #16181b;
+$borderColor: #4c4c4c;
+$box-shadow: 12;
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    // font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-family: 'Roboto', sans-serif;
-
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  // font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 body {
-    background: $background;
-    background-attachment: fixed;
-    color: #b1bde4;
+  background: $background;
+  background-attachment: fixed;
+  color: #b1bde4;
+  letter-spacing: 0.1px;
 }
 
-
-
 ::-webkit-scrollbar {
-    width: 0px;
-    /* Remove scrollbar space */
-    background: transparent;
-    /* Optional: just make scrollbar invisible */
+  width: 0px;
+  /* Remove scrollbar space */
+  background: transparent;
+  /* Optional: just make scrollbar invisible */
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 
-    &:hover {
-        text-decoration: none;
-    }
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 @mixin line-clamp($number) {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: $number;
-    -webkit-box-orient: vertical;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: $number;
+  -webkit-box-orient: vertical;
 }
+
+@mixin channel-icon {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  margin-right: 1rem;
+  background-color: #aaa;
+  border-radius: 50%;
+}
+
+$breakpoint-medium: 1224px;
+$breakpoint-small: 520px;

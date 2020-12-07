@@ -1,44 +1,42 @@
-import React, { useEffect } from 'react'
-import { Container } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { searchVideos } from '../../redux/actions/videos.action'
-import VideoHorizontal from '../../components/videoHorizontal/VideoHorizontal'
+import React, { useEffect } from "react";
+import { Container } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { searchVideos } from "../../redux/actions/videos.action";
+import VideoHorizontal from "../../components/videoHorizontal/VideoHorizontal";
 
 // import InfiniteScroll from 'react-infinite-scroll-component'
-import SkeletonCard from '../../components/skeleton/SkeletonCard'
+import SkeletonCard from "../../components/skeleton/SkeletonCard";
 
 //! no need css :)
-import './searchResultScreen.scss'
+import "./searchResultScreen.scss";
 
 const SearchResultsScreen = () => {
-    const { search_query } = useParams()
+  const { search_query } = useParams();
 
-    const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-    const videos = useSelector(state => state.searchedVideos.videos)
-    const loading = useSelector(state => state.searchedVideos.loading)
+  const videos = useSelector((state) => state.searchedVideos.videos);
+  const loading = useSelector((state) => state.searchedVideos.loading);
 
-    // const [page, setPage] = useState(1)
+  // const [page, setPage] = useState(1)
 
-    useEffect(() => {
+  useEffect(() => {
+    dispatch(searchVideos(search_query));
+  }, [search_query, dispatch]);
 
-        dispatch(searchVideos(search_query))
-    }, [search_query, dispatch])
+  return (
+    <Container className="watchScreen">
+      {!loading ? (
+        videos.map((video) => (
+          <VideoHorizontal key={video.etag} video={video} />
+        ))
+      ) : (
+        <SkeletonCard width="100%" height="200px" count="15" />
+      )}
+    </Container>
 
-
-    return (
-        <Container className="watchScreen">
-            {
-                !loading ?
-                    videos.map(video =>
-                        <VideoHorizontal key={video.etag} video={video} />
-                    ) :
-                    <SkeletonCard width="100%" height="200px" count="15" />
-            }
-        </Container>
-
-        /* {
+    /* {
             videos?.length > 0 &&
             <InfiniteScroll
                 dataLength={videos.length}
@@ -59,10 +57,7 @@ const SearchResultsScreen = () => {
                 </Container>
             </InfiniteScroll>
         } */
+  );
+};
 
-
-
-    )
-}
-
-export default SearchResultsScreen
+export default SearchResultsScreen;

@@ -8,7 +8,6 @@ import Sidebar from './components/sidebar/Sidebar'
 import HomeScreen from './screens/homeScreen/HomeScreen'
 import LoginScreen from './screens/loginScreen/LoginScreen'
 
-import './app.scss'
 import WatchScreen from './screens/watchScreen/WatchScreen'
 import SearchResultsScreen from './screens/searchResultsScreen/SearchResultsScreen'
 import Header from './components/header/Header'
@@ -16,29 +15,27 @@ import Subscriptions from './screens/subscriptions/Subscriptions'
 import ChannelScreen from './screens/channelScreen/ChannelScreen'
 import LikedVideosScreen from './screens/likedVideos/LikedVideos'
 
+import './app.scss'
 
 
 const Layout = ({ children }) => {
 
     const [showSidebar, setShowSidebar] = useState(false)
 
-
-
     const toggleShowSidebar = () => {
         setShowSidebar(value => !value)
     }
 
     return (
-        <Container fluid className="p-0">
+        <div>
             <Header toggleShowSidebar={toggleShowSidebar} />
             <div className="app__container">
-                {/* {<Sidebar  />} */}
                 <Sidebar showSidebar={showSidebar} />
                 <Container fluid>
                     {children}
                 </Container>
             </div>
-        </Container>
+        </div>
     )
 
 }
@@ -60,7 +57,7 @@ const App = () => {
 
     return (
         <Switch>
-            <Route path="/auth" exact>
+            <Route path="/auth" >
                 <LoginScreen />
             </Route>
             <Route path="/" exact>
@@ -68,27 +65,27 @@ const App = () => {
                     <HomeScreen />
                 </Layout>
             </Route>
-            <Route path="/watch/:id" exact>
+            <Route path="/watch/:id" >
                 <Layout>
                     <WatchScreen />
                 </Layout>
             </Route>
-            <Route path="/search/:search_query" exact>
+            <Route path="/search/:search_query" >
                 <Layout>
                     <SearchResultsScreen />
                 </Layout>
             </Route>
-            <Route path="/feed/subscriptions" exact>
+            <Route path="/feed/subscriptions" >
                 <Layout>
                     <Subscriptions />
                 </Layout>
             </Route>
-            <Route path="/feed/likedVideos" exact>
+            <Route path="/feed/likedVideos" >
                 <Layout>
                     <LikedVideosScreen />
                 </Layout>
             </Route>
-            <Route path="/channel/:channelId" exact>
+            <Route path="/channel/:channelId" >
                 <Layout>
                     <ChannelScreen />
                 </Layout>
