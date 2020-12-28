@@ -1,43 +1,42 @@
 @import "../../base.scss";
 
 .sidebar {
-  background: #121417;
+   background: #121417;
 
-  display: flex;
-  flex-direction: column;
+   display: flex;
+   flex-direction: column;
 
-  width: 250px;
-  height: 90vh;
+   width: 250px;
+   height: 90vh;
 
-  position: sticky;
-  top: 10vh;
-  left: 0;
+   position: sticky;
+   top: 10vh;
+   left: 0;
 
-  transition: all 0.2s ease-out;
+   transition: all 0.2s ease-out;
 
-  &.open {
-    transform: translateX(0);
-  }
+   &.open {
+      transform: translateX(0);
+   }
 }
 
 hr {
-  background-color: $borderColor;
+   background-color: $borderColor;
 }
 
 @media (max-width: $breakpoint-medium) {
-  .sidebar {
-    width: 90px;
-    span {
-      display: none;
-    }
-  }
+   .sidebar {
+      width: 90px;
+      span {
+         display: none;
+      }
+   }
 }
 
 @media (max-width: $breakpoint-small) {
-  .sidebar {
-    transform: translateX(-100%);
-
-    position: fixed;
-    z-index: 999;
-  }
+   .sidebar {
+      transform: translateX(-100%);
+      position: fixed;
+      z-index: 999;
+   }
 }

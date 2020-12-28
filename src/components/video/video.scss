@@ -1,60 +1,62 @@
-@import "../../base.scss";
+@import '../../base.scss';
 
 .video {
-  margin-bottom: 1rem;
-  padding: 0.7rem;
+   margin-bottom: 1rem;
+   padding: 0.7rem;
 
-  font-weight: 500;
-  font-size: 0.9rem;
+   font-weight: 500;
+   font-size: 0.9rem;
 
-  cursor: pointer;
+   cursor: pointer;
 
-  &__top {
-    position: relative;
-    margin-bottom: 0.5rem;
+   &__top {
+      position: relative;
+      margin-bottom: 0.5rem;
+      span {
+         width: 100%;
+      }
+      img {
+         width: 100%;
+         //TODO set bg
+      }
+   }
 
-    img {
-      width: 100%;
-      //TODO set bg
-    }
-  }
+   &__title {
+      margin-bottom: 0.1rem;
 
-  &__title {
-    margin-bottom: 0.1rem;
-
-    color: #fff;
-    @include line-clamp(1);
-  }
-
-  &__duration {
-    position: absolute;
-    bottom: 0.3rem;
-    right: 0.3rem;
-
-    padding: 0.2rem;
-    background: #080808ec;
-    border-radius: 3px;
-    color: #fff;
-    font-size: 0.9rem;
-  }
-
-  &__channel {
-    display: flex;
-    align-items: center;
-    margin: 0.5rem 0;
-
-    img {
-      width: 36px;
-      height: 36px;
-      object-fit: contain;
-      margin-right: 0.5rem;
-      border-radius: 50%;
-      cursor: pointer;
-    }
-
-    p {
-      margin-bottom: 0;
+      color: #fff;
       @include line-clamp(1);
-    }
-  }
+   }
+
+   &__duration {
+      position: absolute;
+      bottom: 0.3rem;
+      right: 0.3rem;
+
+      padding: 0.2rem;
+      background: #080808ec;
+      border-radius: 3px;
+      color: #fff;
+      font-size: 0.9rem;
+   }
+
+   &__channel {
+      display: flex;
+      align-items: center;
+      margin: 0.5rem 0;
+
+      img {
+         width: 36px;
+         height: 36px;
+         object-fit: contain;
+         margin-right: 0.5rem;
+         border-radius: 50%;
+         cursor: pointer;
+      }
+
+      p {
+         margin-bottom: 0;
+         @include line-clamp(1);
+      }
+   }
 }

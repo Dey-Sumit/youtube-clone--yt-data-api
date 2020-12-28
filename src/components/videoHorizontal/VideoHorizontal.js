@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react"
-import { Col, Row } from "react-bootstrap"
-import { AiFillEye } from "react-icons/ai"
+import React, { useEffect, useState } from 'react'
+import { Col, Row } from 'react-bootstrap'
+import { AiFillEye } from 'react-icons/ai'
 // import { useDispatch, useSelector } from 'react-redux'
-import { useHistory } from "react-router-dom"
-import moment from "moment"
-import numeral from "numeral"
+import { useHistory } from 'react-router-dom'
+import moment from 'moment'
+import numeral from 'numeral'
 
 // import { getChannelDetails } from '../../redux/actions/channel.action'
-import "./videoHorizontal.scss"
-import request from "../../api"
-import { useSelector } from "react-redux"
-import { LazyLoadImage } from "react-lazy-load-image-component"
-import "react-lazy-load-image-component/src/effects/blur.css"
+import './videoHorizontal.scss'
+import request from '../../api'
+import { useSelector } from 'react-redux'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+import 'react-lazy-load-image-component/src/effects/blur.css'
 
 //rename to card
 const VideoHorizontal = ({
@@ -36,9 +36,9 @@ const VideoHorizontal = ({
    const accessToken = useSelector(state => state.auth.accessToken)
 
    const thumbnail =
-      id.kind === "youtube#channel" || channelScreen
-         ? "videoHorizon__thumbnail-channel"
-         : "videoHorizon__thumbnail-video"
+      id.kind === 'youtube#channel' || channelScreen
+         ? 'videoHorizon__thumbnail-channel'
+         : 'videoHorizon__thumbnail-video'
 
    const history = useHistory()
 
@@ -48,7 +48,7 @@ const VideoHorizontal = ({
    const [views, setViews] = useState(null)
 
    const handleClick = () => {
-      if (id.kind === "youtube#channel" || channelScreen)
+      if (id.kind === 'youtube#channel' || channelScreen)
          history.push(`/channel/${resourceId.channelId}`)
       else history.push(`/watch/${id.videoId}`)
    }
@@ -57,9 +57,9 @@ const VideoHorizontal = ({
       const get_channel_thumbnail = async () => {
          const {
             data: { items },
-         } = await request("/channels", {
+         } = await request('/channels', {
             params: {
-               part: "snippet",
+               part: 'snippet',
                id: channelId,
             },
             headers: { Authorization: `Bearer ${accessToken}` },
@@ -73,9 +73,9 @@ const VideoHorizontal = ({
       const get_video_details = async () => {
          const {
             data: { items },
-         } = await request("/videos", {
+         } = await request('/videos', {
             params: {
-               part: "contentDetails,statistics",
+               part: 'contentDetails,statistics',
                id: id.videoId,
             },
             headers: { Authorization: `Bearer ${accessToken}` },
@@ -83,71 +83,71 @@ const VideoHorizontal = ({
          setViews(items[0].statistics.viewCount)
          setDuration(items[0].contentDetails.duration)
       }
-      if (!channelScreen && id.kind !== "youtube#channel") {
+      if (!channelScreen && id.kind !== 'youtube#channel') {
          get_video_details()
       }
    }, [id, channelScreen, accessToken])
 
    const seconds = moment.duration(duration).asSeconds()
-   const _duration = moment.utc(seconds * 1000).format("mm:ss")
+   const _duration = moment.utc(seconds * 1000).format('mm:ss')
 
    return (
-      <Row className="videoHorizon" onClick={handleClick}>
+      <Row className='videoHorizon' onClick={handleClick}>
          <Col
             xs={6}
             md={showDescription ? 4 : 6}
-            className="videoHorizon__left pr-0">
+            className='videoHorizon__left'>
             {/* <img
                src={medium.url}
                alt=""
                className={`videoHorizon__thumbnail ${thumbnail}`}
             /> */}
             <LazyLoadImage
-               effect="blur"
+               effect='blur'
                src={medium.url}
                className={`videoHorizon__thumbnail ${thumbnail}`}
-               wrapperClassName="videoHorizon__thumbnail-wrapper"
+               wrapperClassName='videoHorizon__thumbnail-wrapper'
             />
 
-            {_duration !== "00:00" && (
-               <span className="videoHorizon__duration">{_duration}</span>
+            {_duration !== '00:00' && (
+               <span className='videoHorizon__duration'>{_duration}</span>
             )}
          </Col>
 
          <Col
             xs={6}
             md={showDescription ? 8 : 6}
-            className="videoHorizon__right">
-            <p className="videoHorizon__title">{title}</p>
+            className='videoHorizon__right'>
+            <p className='videoHorizon__title'>{title}</p>
 
             {!channelScreen && (
-               <div className="videoHorizon__metadata">
+               <div className='videoHorizon__metadata'>
                   {views && (
                      <span>
-                        <AiFillEye /> {numeral(views).format("0.a")} views •{" "}
+                        <AiFillEye /> {numeral(views).format('0.a')} views •{' '}
                      </span>
                   )}
                   <span>{moment(publishedAt).fromNow()}</span>
                </div>
             )}
 
-            {id.kind !== "youtube#channel" && !channelScreen && (
-               <div className="videoHorizon__channel">
+            {id.kind !== 'youtube#channel' && !channelScreen && (
+               <div className='videoHorizon__channel'>
                   <img
                      src={channelIcon && channelIcon.url}
-                     alt=""
-                     className="videoHorizon__channel-icon"
+                     alt=''
+                     className='videoHorizon__channel-icon'
                   />
-                  <p className="videoHorizon__channel-name">{channelTitle}</p>
+                  <p className='videoHorizon__channel-name'>{channelTitle}</p>
                </div>
             )}
 
             {showDescription && (
-               <p className="videoHorizon__desc">{description} </p>
+               <p className='videoHorizon__desc'>{description} </p>
             )}
 
             {channelScreen && (
-               <p className="mt-2">
+               <p className='mt-2'>
                   {video.contentDetails.totalItemCount} videos
                </p>
             )}

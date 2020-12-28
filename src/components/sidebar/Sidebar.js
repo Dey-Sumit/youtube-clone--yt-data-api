@@ -1,6 +1,6 @@
 import React from "react"
-import { FiHome } from "react-icons/fi"
-import { AiOutlineFire } from "react-icons/ai"
+// import { FiHome } from "react-icons/fi"
+// import { AiOutlineFire } from "react-icons/ai"
 import {
    MdSubscriptions,
    MdExitToApp,
