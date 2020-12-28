@@ -41,7 +41,6 @@ const Sidebar = ({ showSidebar }) => {
          {/* <SidebarItem Icon={AiOutlineFire} text="Explore" /> */}
 
          <SidebarItem Icon={MdHistory} text='Just to' />
-         <SidebarItem Icon={MdHistory} text='Just too' />
 
          <SidebarItem Icon={MdLibraryBooks} text='Populate' />
          <SidebarItem Icon={MdSentimentDissatisfied} text='Sidebar' />
