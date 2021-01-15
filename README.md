@@ -5,7 +5,7 @@
 
 > Fully Functional YouTube Clone Responsive Web App using React,Bootstrap & YouTube API v3.You can get popular videos,access categories bar along with pagination, play a video,comment on a video,like a video & many more.
 
-### ✨ [Demo](www.not-utube.web.app)
+### ✨ [Demo](https://not-utube.web.app/)
 
 ## Install
 
